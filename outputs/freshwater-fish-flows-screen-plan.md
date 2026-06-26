@@ -521,10 +521,12 @@ Uses the MOJ Add to a list principle adapted to the supplied NRW progressive dis
 
 Uses the supplied fish layout spacing:
 
-- 56px between the main heading section and the fish questions
+- 40px between the main heading section and the fish questions stack
 - 56px between fish question blocks
 - 24px between each question text group and its control
 - 16px between a question heading and its supporting information line
+- no extra default H2 margin inside the fish heading section
+- 24px between the length/weight label and its input
 
 ### Options Or Fields
 

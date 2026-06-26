@@ -923,11 +923,13 @@ Behaviour notes:
 
 Fish add-to-a-list variant:
 
-- Use a `56px` gap between the main heading section and the fish questions.
+- Use a `40px` gap between the main heading section and the fish questions stack.
 - Use a `56px` gap between fish question blocks.
 - Use a `24px` gap between each question text group and its control.
 - Use a `16px` gap between a question heading and its supporting information line.
+- Do not add extra default H2 margin inside the fish heading section.
 - Use full-width `640px` by `48px` inputs and selects for fish species, number, length, and weight.
+- Use a `24px` gap between the length/weight label and its input.
 - For length/weight, default to length and use a link-style switch action rather than exposing both controls at once.
 - The first state uses the standard primary `Save and continue` button. Do not add a separate `Add fish` button.
 - The added-fish state uses the heading `You have added X type(s) of fish`, a compact summary list with Change and Remove actions, and the question `Do you need to add another type of fish?`.

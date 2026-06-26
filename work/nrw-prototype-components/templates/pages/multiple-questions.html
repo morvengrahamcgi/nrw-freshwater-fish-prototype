@@ -1,0 +1,46 @@
+<form class="nrw-screen" novalidate>
+  <div class="nrw-question-stack">
+    <div class="nrw-question-block">
+      <fieldset>
+        <legend>
+          <h2>Do you want your application to be confidential?</h2>
+        </legend>
+        <p class="nrw-body-copy">Tell us if any information in your application should not be made public.</p>
+
+        <div class="nrw-radios">
+          <label class="nrw-radio-item" for="confidential-yes">
+            <input type="radio" id="confidential-yes" name="confidential" value="yes">
+            <span class="nrw-radio-control" aria-hidden="true"></span>
+            <span class="nrw-radio-content">
+              <span class="nrw-radio-label">Yes</span>
+            </span>
+          </label>
+
+          <label class="nrw-radio-item" for="confidential-no">
+            <input type="radio" id="confidential-no" name="confidential" value="no">
+            <span class="nrw-radio-control" aria-hidden="true"></span>
+            <span class="nrw-radio-content">
+              <span class="nrw-radio-label">No</span>
+            </span>
+          </label>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="nrw-question-block">
+      <h2>Why do you want your application to be confidential?</h2>
+      <p class="nrw-body-copy">Explain what information should be kept confidential and why it should not be made public.</p>
+      <textarea class="nrw-textarea" rows="7"></textarea>
+    </div>
+  </div>
+
+  <div class="nrw-button-row">
+    <button type="button" class="nrw-button nrw-button--secondary nrw-button--back">Back</button>
+    <button type="submit" class="nrw-button nrw-button--primary nrw-button--continue">
+      <span>Continue</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M9.3 5.3 16 12l-6.7 6.7-1.4-1.4 5.3-5.3-5.3-5.3 1.4-1.4Z"></path>
+      </svg>
+    </button>
+  </div>
+</form>

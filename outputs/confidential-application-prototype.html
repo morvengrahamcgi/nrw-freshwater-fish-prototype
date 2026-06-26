@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Confidential application - NRW prototype</title>
+    <link rel="stylesheet" href="../work/nrw-prototype-components/styles/nrw.css">
+    <style>
+      fieldset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+
+      legend {
+        padding: 0;
+      }
+
+      .nrw-error-summary:focus {
+        outline: 4px solid var(--nrw-focus);
+      }
+
+      .nrw-error-summary h2,
+      .nrw-result h2 {
+        margin: 0 0 8px;
+        font-size: 24px;
+        line-height: 29px;
+      }
+
+      .nrw-error-summary ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      .nrw-result {
+        width: min(640px, 100%);
+        margin-top: 40px;
+        padding: 16px;
+        border-radius: 4px;
+        background: #f0f5f4;
+        border-left: 6px solid #128300;
+      }
+
+      @media (max-width: 768px) {
+        .nrw-top-nav,
+        .nrw-top-nav__inner {
+          height: auto;
+        }
+
+        .nrw-top-nav__inner,
+        .nrw-nav-actions,
+        .nrw-button-row {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .nrw-top-nav__inner {
+          padding: 0 16px;
+        }
+
+        .nrw-logo-block,
+        .nrw-nav-actions,
+        .nrw-language-block,
+        .nrw-sign-in-block {
+          width: 100%;
+        }
+
+        .nrw-logo-block {
+          align-items: flex-start;
+        }
+
+        .nrw-page-heading__title,
+        .nrw-page-heading h1 {
+          font-size: 36px;
+          line-height: 44px;
+        }
+
+        .nrw-question-block h2 {
+          font-size: 24px;
+          line-height: 29px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="nrw-top-nav">
+      <div class="nrw-top-nav__inner">
+        <div class="nrw-logo-block" aria-label="Natural Resources Wales">
+          <div class="nrw-logo-frame">
+            <div class="nrw-logo" aria-hidden="true">
+              <img class="nrw-logo__image" src="../work/nrw-prototype-components/assets/nrw-logo.svg" alt="">
+            </div>
+          </div>
+        </div>
+
+        <nav class="nrw-nav-actions" aria-label="Service">
+          <div class="nrw-language-block">
+            <a href="#">Cymraeg</a>
+          </div>
+          <div class="nrw-sign-in-block">
+            <a class="nrw-sign-in-link" href="#">
+              <span>Sign in</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M10 17v-3H3v-4h7V7l5 5-5 5Zm2-14h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7v-2h7V5h-7V3Z"></path>
+              </svg>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <div class="nrw-page-heading">
+      <div class="nrw-page-heading__inner">
+        <div class="nrw-page-heading__content">
+          <h1 class="nrw-page-heading__title">Application details</h1>
+        </div>
+      </div>
+    </div>
+
+    <main class="nrw-main">
+      <div class="nrw-error-summary" id="error-summary" tabindex="-1" hidden>
+        <h2>There is a problem</h2>
+        <ul id="error-list"></ul>
+      </div>
+
+      <form class="nrw-screen" id="confidential-form" novalidate>
+        <div class="nrw-question-stack">
+          <div class="nrw-question-block">
+            <fieldset id="confidential-fieldset">
+              <legend>
+                <h2>Do you want your application to be confidential?</h2>
+              </legend>
+              <p class="nrw-body-copy">Tell us if any information in your application should not be made public.</p>
+              <span class="nrw-field-error" id="confidential-error" hidden></span>
+
+              <div class="nrw-radios">
+                <label class="nrw-radio-item" for="confidential-yes">
+                  <input type="radio" id="confidential-yes" name="confidential" value="yes" aria-controls="why-confidential">
+                  <span class="nrw-radio-control" aria-hidden="true"></span>
+                  <span class="nrw-radio-content">
+                    <span class="nrw-radio-label">Yes</span>
+                  </span>
+                </label>
+
+                <label class="nrw-radio-item" for="confidential-no">
+                  <input type="radio" id="confidential-no" name="confidential" value="no">
+                  <span class="nrw-radio-control" aria-hidden="true"></span>
+                  <span class="nrw-radio-content">
+                    <span class="nrw-radio-label">No</span>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="nrw-question-block" id="why-confidential" hidden>
+            <h2 id="why-confidential-heading">Why do you want your application to be confidential?</h2>
+            <p class="nrw-body-copy">Explain what information should be kept confidential and why it should not be made public.</p>
+            <span class="nrw-field-error" id="reason-error" hidden></span>
+            <textarea class="nrw-textarea" id="confidential-reason" name="confidential-reason" rows="7" aria-labelledby="why-confidential-heading"></textarea>
+          </div>
+        </div>
+
+        <div class="nrw-button-row">
+          <button type="button" class="nrw-button nrw-button--secondary nrw-button--back">Back</button>
+          <button type="submit" class="nrw-button nrw-button--primary nrw-button--continue">
+            <span>Continue</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M9.3 5.3 16 12l-6.7 6.7-1.4-1.4 5.3-5.3-5.3-5.3 1.4-1.4Z"></path>
+            </svg>
+          </button>
+        </div>
+      </form>
+
+      <form class="nrw-screen" id="personal-data-form" novalidate hidden>
+        <div class="nrw-question-stack nrw-question-stack--single">
+          <div class="nrw-question-block">
+            <fieldset>
+              <legend>
+                <h2>How we use your personal data</h2>
+              </legend>
+              <p class="nrw-body-copy">We’ll use the information you provide in line with UK data protection laws. For more about how we collect, store and use your data, read our <a href="#">privacy notice</a>.</p>
+              <span class="nrw-field-error" id="personal-data-error" hidden></span>
+
+              <div class="nrw-checkboxes">
+                <label class="nrw-checkbox-item" for="personal-data-understood">
+                  <input type="checkbox" id="personal-data-understood" name="personal-data-understood">
+                  <span class="nrw-checkbox-control" aria-hidden="true"></span>
+                  <span class="nrw-checkbox-content">
+                    <span class="nrw-checkbox-label">I have read and understood this information</span>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+
+        <div class="nrw-button-row">
+          <button type="button" class="nrw-button nrw-button--secondary nrw-button--back" id="personal-data-back">Back</button>
+          <button type="submit" class="nrw-button nrw-button--primary nrw-button--continue">
+            <span>Continue</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M9.3 5.3 16 12l-6.7 6.7-1.4-1.4 5.3-5.3-5.3-5.3 1.4-1.4Z"></path>
+            </svg>
+          </button>
+        </div>
+      </form>
+
+      <section class="nrw-result" id="result" aria-live="polite" hidden>
+        <h2>Answer saved</h2>
+        <p id="result-text"></p>
+      </section>
+    </main>
+
+    <div class="nrw-feedback">
+      <span>Is there anything wrong with this page?</span>
+      <a href="#">Give feedback</a>
+    </div>
+
+    <footer class="nrw-footer">
+      <div class="nrw-footer__rule"></div>
+      <div class="nrw-footer__inner">
+        <ul class="nrw-footer__links">
+          <li class="nrw-footer__link-item"><a href="#">Accessibility</a></li>
+          <li class="nrw-footer__link-divider" aria-hidden="true"></li>
+          <li class="nrw-footer__link-item"><a href="#">Privacy notice</a></li>
+          <li class="nrw-footer__link-divider" aria-hidden="true"></li>
+          <li class="nrw-footer__link-item"><a href="#">Terms and conditions</a></li>
+          <li class="nrw-footer__link-divider" aria-hidden="true"></li>
+          <li class="nrw-footer__link-item"><a href="#">Cookies</a></li>
+        </ul>
+        <div class="nrw-footer__divider"></div>
+        <div class="nrw-footer__brand-row">
+          <div class="nrw-footer__logo" aria-label="Natural Resources Wales">
+            <svg class="nrw-footer__logo-mark" viewBox="0 0 48 45" aria-hidden="true" focusable="false">
+              <polygon points="24,0 47,12 47,33 24,45 1,33 1,12" fill="#A1A1A1"></polygon>
+              <polygon points="24,0 47,12 24,24 1,12" fill="#B8B8B8"></polygon>
+              <polygon points="1,12 24,24 24,45 1,33" fill="#8F8F8F"></polygon>
+              <polygon points="47,12 24,24 24,45 47,33" fill="#777777"></polygon>
+              <polygon points="13,22 24,16 35,22 24,28" fill="#58595B"></polygon>
+            </svg>
+            <div class="nrw-footer__logo-text" aria-hidden="true">
+              <span>Cyfoeth Naturiol Cymru</span>
+              <span>Natural Resources Wales</span>
+            </div>
+          </div>
+          <p class="nrw-footer__copyright">&copy; Natural Resources Wales</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const form = document.querySelector("#confidential-form");
+      const personalDataForm = document.querySelector("#personal-data-form");
+      const personalDataBack = document.querySelector("#personal-data-back");
+      const personalDataCheckbox = document.querySelector("#personal-data-understood");
+      const personalDataError = document.querySelector("#personal-data-error");
+      const yes = document.querySelector("#confidential-yes");
+      const no = document.querySelector("#confidential-no");
+      const conditional = document.querySelector("#why-confidential");
+      const reason = document.querySelector("#confidential-reason");
+      const errorSummary = document.querySelector("#error-summary");
+      const errorList = document.querySelector("#error-list");
+      const confidentialError = document.querySelector("#confidential-error");
+      const reasonError = document.querySelector("#reason-error");
+      const result = document.querySelector("#result");
+      const resultText = document.querySelector("#result-text");
+
+      function setConditionalVisibility() {
+        conditional.hidden = !yes.checked;
+        if (!yes.checked) {
+          reason.value = "";
+          reasonError.hidden = true;
+          reason.removeAttribute("aria-describedby");
+        }
+      }
+
+      function clearErrors() {
+        errorList.innerHTML = "";
+        errorSummary.hidden = true;
+        confidentialError.hidden = true;
+        reasonError.hidden = true;
+        personalDataError.hidden = true;
+        confidentialError.textContent = "";
+        reasonError.textContent = "";
+        personalDataError.textContent = "";
+        yes.removeAttribute("aria-describedby");
+        no.removeAttribute("aria-describedby");
+        reason.removeAttribute("aria-describedby");
+        personalDataCheckbox.removeAttribute("aria-describedby");
+      }
+
+      function addError(targetId, message) {
+        const item = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = `#${targetId}`;
+        link.textContent = message;
+        item.appendChild(link);
+        errorList.appendChild(item);
+      }
+
+      yes.addEventListener("change", setConditionalVisibility);
+      no.addEventListener("change", setConditionalVisibility);
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        clearErrors();
+        result.hidden = true;
+
+        const selected = document.querySelector("input[name='confidential']:checked");
+        let hasError = false;
+
+        if (!selected) {
+          hasError = true;
+          const message = "Select yes if you want your application to be confidential";
+          confidentialError.textContent = message;
+          confidentialError.hidden = false;
+          yes.setAttribute("aria-describedby", "confidential-error");
+          no.setAttribute("aria-describedby", "confidential-error");
+          addError("confidential-yes", message);
+        }
+
+        if (yes.checked && reason.value.trim().length === 0) {
+          hasError = true;
+          const message = "Enter why you want your application to be confidential";
+          reasonError.textContent = message;
+          reasonError.hidden = false;
+          reason.setAttribute("aria-describedby", "reason-error");
+          addError("confidential-reason", message);
+        }
+
+        if (hasError) {
+          errorSummary.hidden = false;
+          errorSummary.focus();
+          return;
+        }
+
+        form.hidden = true;
+        personalDataForm.hidden = false;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      personalDataBack.addEventListener("click", () => {
+        personalDataForm.hidden = true;
+        form.hidden = false;
+        result.hidden = true;
+        clearErrors();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      personalDataForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        clearErrors();
+        result.hidden = true;
+
+        if (!personalDataCheckbox.checked) {
+          const message = "Confirm you have read and understood how we use your personal data";
+          personalDataError.textContent = message;
+          personalDataError.hidden = false;
+          personalDataCheckbox.setAttribute("aria-describedby", "personal-data-error");
+          addError("personal-data-understood", message);
+          errorSummary.hidden = false;
+          errorSummary.focus();
+          return;
+        }
+
+        resultText.textContent = "You confirmed you have read and understood how we use your personal data.";
+        result.hidden = false;
+        result.scrollIntoView({ block: "start", behavior: "smooth" });
+      });
+    </script>
+  </body>
+</html>

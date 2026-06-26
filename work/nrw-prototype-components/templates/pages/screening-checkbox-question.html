@@ -1,0 +1,45 @@
+<form class="nrw-screen nrw-screening-checkbox-page" novalidate>
+  <div class="nrw-screening-question-block">
+    <div class="nrw-question-intro">
+      <h2>Which of these activities are you planning to do?</h2>
+      <p class="nrw-body-copy">Select all activities that apply to your project. This helps us understand whether you need to continue with this application.</p>
+    </div>
+
+    <fieldset class="nrw-checkbox-group">
+      <legend class="nrw-checkbox-group__label">Select all that apply</legend>
+
+      <div class="nrw-checkboxes">
+        <label class="nrw-checkbox-item" for="activity-dredging">
+          <input type="checkbox" id="activity-dredging" name="activity" value="dredging">
+          <span class="nrw-checkbox-control" aria-hidden="true"></span>
+          <span class="nrw-checkbox-content">
+            <span class="nrw-checkbox-label">Dredging</span>
+          </span>
+        </label>
+
+        <label class="nrw-checkbox-item" for="activity-disposal">
+          <input type="checkbox" id="activity-disposal" name="activity" value="disposal">
+          <span class="nrw-checkbox-control" aria-hidden="true"></span>
+          <span class="nrw-checkbox-content">
+            <span class="nrw-checkbox-label">Disposal of materials</span>
+          </span>
+        </label>
+
+        <div class="nrw-checkbox-divider" aria-hidden="true">or</div>
+
+        <label class="nrw-checkbox-item" for="activity-none">
+          <input type="checkbox" id="activity-none" name="activity" value="none">
+          <span class="nrw-checkbox-control" aria-hidden="true"></span>
+          <span class="nrw-checkbox-content">
+            <span class="nrw-checkbox-label">None of the above</span>
+          </span>
+        </label>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="nrw-button-row">
+    <button type="button" class="nrw-button nrw-button--secondary nrw-button--back">Back</button>
+    <button type="submit" class="nrw-button nrw-button--primary nrw-button--continue-short">Continue</button>
+  </div>
+</form>

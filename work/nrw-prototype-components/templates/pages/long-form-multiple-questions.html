@@ -1,0 +1,76 @@
+<form class="nrw-screen" novalidate>
+  <div class="nrw-question-stack">
+    <div class="nrw-question-block nrw-question-block--wide">
+      <div class="nrw-question-intro nrw-question-intro--wide">
+        <h2>What type of activity are you applying for?</h2>
+        <p class="nrw-body-copy">Choose the activity that best describes your project. If you are not sure, choose the closest option and continue.</p>
+      </div>
+
+      <fieldset>
+        <legend class="nrw-visually-hidden">What type of activity are you applying for?</legend>
+        <div class="nrw-radios nrw-radios--wide">
+          <label class="nrw-radio-item" for="activity-option-1">
+            <input type="radio" id="activity-option-1" name="activity-type" value="option-1">
+            <span class="nrw-radio-control" aria-hidden="true"></span>
+            <span class="nrw-radio-content">
+              <span class="nrw-radio-label">Construct, alter or improve works</span>
+            </span>
+          </label>
+
+          <label class="nrw-radio-item" for="activity-option-2">
+            <input type="radio" id="activity-option-2" name="activity-type" value="option-2">
+            <span class="nrw-radio-control" aria-hidden="true"></span>
+            <span class="nrw-radio-content">
+              <span class="nrw-radio-label">Remove, dredge or deposit material</span>
+            </span>
+          </label>
+
+          <label class="nrw-radio-item" for="activity-option-3">
+            <input type="radio" id="activity-option-3" name="activity-type" value="option-3">
+            <span class="nrw-radio-control" aria-hidden="true"></span>
+            <span class="nrw-radio-content">
+              <span class="nrw-radio-label">Other activity</span>
+            </span>
+          </label>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="nrw-question-block nrw-question-block--wide">
+      <div class="nrw-question-intro">
+        <p class="nrw-body-copy nrw-body-copy--bold">Enter a short name for this activity.</p>
+      </div>
+      <input class="nrw-text-input" type="text" id="activity-name" name="activity-name">
+    </div>
+
+    <div class="nrw-question-block nrw-question-block--wide">
+      <dl class="nrw-summary-list nrw-summary-list--with-actions">
+        <div class="nrw-summary-list__row">
+          <dt class="nrw-summary-list__key">Activity</dt>
+          <dd class="nrw-summary-list__value">Dredging</dd>
+          <dd class="nrw-summary-list__actions"><a href="#">Change</a></dd>
+        </div>
+        <div class="nrw-summary-list__row">
+          <dt class="nrw-summary-list__key">Location</dt>
+          <dd class="nrw-summary-list__value">Cardiff Bay</dd>
+          <dd class="nrw-summary-list__actions"><a href="#">Change</a></dd>
+        </div>
+        <div class="nrw-summary-list__row">
+          <dt class="nrw-summary-list__key">Status</dt>
+          <dd class="nrw-summary-list__value">In progress</dd>
+          <dd class="nrw-summary-list__actions"><a href="#">Change</a></dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="nrw-button-row nrw-button-row--wide">
+    <button type="button" class="nrw-button nrw-button--secondary nrw-button--back">Back</button>
+    <button type="submit" class="nrw-button nrw-button--primary nrw-button--continue">
+      <span>Save and continue</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M9.3 5.3 16 12l-6.7 6.7-1.4-1.4 5.3-5.3-5.3-5.3 1.4-1.4Z"></path>
+      </svg>
+    </button>
+  </div>
+</form>

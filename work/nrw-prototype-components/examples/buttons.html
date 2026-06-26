@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NRW button examples</title>
+    <link rel="stylesheet" href="../styles/nrw.css">
+    <style>
+      .button-example-section {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        margin-bottom: 40px;
+      }
+
+      .button-example-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="nrw-main">
+      <h1>Buttons</h1>
+
+      <section class="button-example-section" aria-labelledby="button-types">
+        <h2 id="button-types">Types</h2>
+        <div class="button-example-row">
+          <button type="button" class="nrw-button nrw-button--primary">
+            <span>Primary</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M9.3 5.3 16 12l-6.7 6.7-1.4-1.4 5.3-5.3-5.3-5.3 1.4-1.4Z"></path>
+            </svg>
+          </button>
+          <button type="button" class="nrw-button nrw-button--secondary">Secondary</button>
+          <button type="button" class="nrw-button nrw-button--tertiary">Tertiary</button>
+          <button type="button" class="nrw-button nrw-button--danger">Danger</button>
+        </div>
+      </section>
+
+      <section class="button-example-section" aria-labelledby="button-sizes">
+        <h2 id="button-sizes">Sizes</h2>
+        <div class="button-example-row">
+          <button type="button" class="nrw-button nrw-button--primary">Large</button>
+          <button type="button" class="nrw-button nrw-button--primary nrw-button--medium">Medium</button>
+          <button type="button" class="nrw-button nrw-button--primary nrw-button--small">Small</button>
+        </div>
+      </section>
+
+      <section class="button-example-section" aria-labelledby="button-actions">
+        <h2 id="button-actions">Form Actions</h2>
+        <div class="nrw-button-row">
+          <button type="button" class="nrw-button nrw-button--secondary nrw-button--back">Back</button>
+          <button type="button" class="nrw-button nrw-button--primary nrw-button--continue">
+            <span>Continue</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M9.3 5.3 16 12l-6.7 6.7-1.4-1.4 5.3-5.3-5.3-5.3 1.4-1.4Z"></path>
+            </svg>
+          </button>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

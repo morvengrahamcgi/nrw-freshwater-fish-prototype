@@ -57,7 +57,8 @@ Use these layout rules by default unless a more specific approved template overr
 - content is left aligned in the approved content width
 - question blocks have `56px` between them
 - inside each question block: `H2`, then `16px`, then supporting text, then `24px`, then the component
-- where a component has a visible label, there should be `24px` between the label and the field or control
+- where a text input, select, or similar field has a visible label, use `8px` between the label and the field
+- where a question has supporting copy above a control group, keep `24px` between the question text and the control group unless a more specific approved screen overrides it
 - do not centre body content
 
 ## Design Principles

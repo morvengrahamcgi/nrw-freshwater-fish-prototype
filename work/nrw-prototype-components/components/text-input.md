@@ -24,6 +24,7 @@ Use text inputs when users need to enter a short piece of information, such as a
 
 - Use `.nrw-text-input` from `styles/nrw.css`.
 - Keep visible labels outside the input using standard GOV.UK form structure.
+- When a field has a visible label directly above it, use `8px` between the label and the input.
 - Put whole-question information under the question heading as `.nrw-application-question__body`, not as field-level hint text.
 - Use field hint text only when the help belongs specifically to the input control.
 - Use `autocomplete`, `inputmode`, and type attributes where they improve the experience.

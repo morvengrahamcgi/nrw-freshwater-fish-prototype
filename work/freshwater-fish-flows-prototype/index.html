@@ -254,7 +254,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 0;
+        gap: 8px;
       }
 
       .prototype-contact-details .prototype-form-group + .prototype-form-group,
@@ -263,18 +263,22 @@
       }
 
       .prototype-contact-details .prototype-form-group .prototype-label {
-        margin-bottom: 8px;
+        margin-bottom: 0;
         color: var(--nrw-body);
         font-size: 16px;
         line-height: 24px;
       }
 
-      .prototype-contact-details .prototype-form-group .nrw-field-error {
-        margin-bottom: 8px;
-      }
-
       .prototype-contact-details .nrw-text-input {
         width: min(640px, 100%);
+      }
+
+      .prototype-contact-details fieldset .nrw-application-question__body {
+        margin-bottom: 16px;
+      }
+
+      .prototype-contact-details fieldset .nrw-application-question__body p {
+        margin-bottom: 0;
       }
 
       .prototype-landing {
@@ -1279,7 +1283,6 @@
                 <div class="nrw-question-block nrw-question-block--progressive">
                   <div class="prototype-static-detail">
                     <h3 class="prototype-static-detail__label">Address</h3>
-                    <p class="prototype-static-detail__hint">Body text</p>
                   </div>
 
                   <div class="prototype-form-group" id="contact-address-line1-group">
@@ -1372,7 +1375,7 @@
             <div class="nrw-application-question">
               <fieldset>
                 <legend>
-                  <h2>Which task are you planning on<br>completing?</h2>
+                  <h2>Which type of permit are you applying for?</h2>
                 </legend>
 
                 <div class="nrw-application-question__body">

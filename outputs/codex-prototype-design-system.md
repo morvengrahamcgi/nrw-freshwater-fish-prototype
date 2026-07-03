@@ -303,6 +303,7 @@ Use realistic sample content but no real user data.
 - Short text input border: `2px solid #1F1F1F`.
 - Short text input background: `#FFFFFF`.
 - Short text input should use Gotham Rounded Book, `16px`, `24px` line height, `#333333`.
+- When a short text input has a visible label directly above it, use `8px` between the label and the input.
 - Text input hint text: `640px` wide, Gotham Rounded Book, `16px`, `24px` line height, `#333333`.
 - Unit switch text input component: `640px` wide with `24px` gap between the input group and switch link.
 - Unit switch label: Gotham Rounded Bold, `16px`, `24px` line height, `#333333`.

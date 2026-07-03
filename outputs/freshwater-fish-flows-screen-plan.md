@@ -21,17 +21,22 @@ For each screen, define the content and behaviour first, then add it to the prot
 
 | ID | Screen | Source or approval | Status | Notes |
 | --- | --- | --- | --- | --- |
-| 00 | Task list | User provided on 2026-06-26 | Built | First page of the prototype. Uses the NRW page shell, a left-justified 640px task-list column, grouped `Summary=Card, Width=Default` components, links into the journey, and status text for each row. All `Go back to task list` links return here. |
-| 01 | Which task are you planning on completing? | User provided on 2026-06-25; exact Template layout supplied on 2026-06-26; left-justified body content clarified on 2026-06-26 | Built | Main header: `Apply for permission to stock, remove and supply fish`. Uses long 182px NRW page heading, left-justified 640px content column, visible body copy, radio options: `Stocking fish`, `Supplying fish`, `Removing fish`, Back and Save and continue buttons, task-list link, inline feedback link, and NRW footer link set. Back returns to Screen 00. Save and continue validates required answer. All three task routes branch to Screen 02. |
-| 02 | What is the name of the water? | User provided on 2026-06-25; split-screen GOV.UK pattern agreed on 2026-06-25; shared route confirmed on 2026-06-26 | Built | Shared by supply, stocking, and removal routes. Single-question page using question heading only. Text input label is visually hidden. Required validation. Back returns to Screen 01. Save and continue goes to Screen 03. |
-| 03 | What type of water is it? | User provided on 2026-06-25; split-screen GOV.UK pattern agreed on 2026-06-25; shared route confirmed on 2026-06-26; progressive stillwater questions provided on 2026-06-26 | Built | Shared by supply, stocking, and removal routes. Uses progressive question blocks on the same screen. Asks for water type with options `Canal`, `River`, `Stillwater`. If `Stillwater` is selected, reveals a separate CEFAS registration number question block. If the selected task was `Supplying fish`, also reveals a separate landlocked/on line question block. Back returns to Screen 02. Save and continue goes to Screen 04. |
-| 04 | What is the nearest town/city of your proposed activity? | User provided on 2026-06-26; question information placement clarified on 2026-06-26 | Built | Shared by supply, stocking, and removal routes. Text input question with question information line: `This will appear on your application form`. Back returns to Screen 03. Save and continue goes to Screen 05. |
-| 05 | Provide a National Grid Reference / Provide a what3words (optional) | User provided on 2026-06-26 | Built | Shared by supply, stocking, and removal routes. Two text input question blocks on the same page. National Grid Reference is required. what3words is optional. Back returns to Screen 04. Save and continue goes to Screen 06. |
-| 06 | Are any of the fish a non-native species? | User provided on 2026-06-26 | Built | Shared by supply, stocking, and removal routes. Radio options: `Yes`, `No`, `Unknown`. Required validation. Back returns to Screen 05. Save and continue goes to Screen 07. |
-| 07 | Are there any crayfish present? | User provided on 2026-06-26 | Built | Shared by supply, stocking, and removal routes. Radio options: `Yes`, `No`, `Unknown`. Required validation. Back returns to Screen 06. Save and continue goes to Screen 08. |
-| 08 | Fish | User provided on 2026-06-26; updated to follow supplied progressive disclosure screenshots on 2026-06-26 | Built | Shared by supply, stocking, and removal routes. Progressive add-to-list journey. First state asks for one fish species and uses the standard `Save and continue` button to add it. Added state shows `You have added X type(s) of fish`, a compact list with Change and Remove links, and asks `Do you need to add another type of fish?`. Back returns to Screen 07. If the user answers `No`, Save and continue goes to Screen 09. |
-| 09 | How we use your personal data | User provided on 2026-06-26 | Built | Shared by supply, stocking, and removal routes. Content page with required checkbox: `I have read and understood this information`. Back returns to Screen 08 added-fish state. Save and continue goes to Screen 10. |
-| 10 | Declaration | User provided on 2026-06-26 | Built | Shared by supply, stocking, and removal routes. Declaration page with required checkbox: `To the best of my knowledge and belief, the information I have given is correct`. Back returns to Screen 09. Save and continue reaches the current prototype holding message. |
+| 00 | Landing screen | User provided on 2026-06-26; opening screen updated on 2026-07-02 | Built | First page of the prototype. Uses the NRW page shell and presents three category sections: `Marine licensing`, `Freshwater fish permits`, and `Land access`. Only `Freshwater fish permits` links into the working journey; the other two categories are visible but inactive. |
+| 01 | Applications | User provided on 2026-07-02 | Built | Opens after `Freshwater fish permits` is selected. Uses two full-width four-column lists. `Applications in progress` contains `Draft` and `Submitted` rows. `Permits` contains `Active`, `Expired`, and `Rejected` rows. All `Continue`, `View`, and `Amend` actions open the completed application task list. |
+| 02 | Completed application task list | User provided on 2026-07-02 | Built | Opens from all `Continue`, `View`, and `Amend` actions on the applications dashboard. Uses grouped summary cards for `Application details`, `Fish and environment`, and `Review and submit`, with all rows marked `Completed`. |
+| 03 | Who is the licence for? | User provided on 2026-07-03 | Built | New first journey screen before the task question. Radio options with hint text: `A public body` with hint `For example - a council`, `A charity`, `A company`, and `An individual` with hint `As an individual acting independently`. Back returns to the current task-list view. Save and continue validates required answer and goes to Screen 04. |
+| 04 | Are you applying on behalf of someone else? | User provided on 2026-07-03 | Built | Second contact-details screen before the task question. Radio options: `Yes` with hint `For example, you are an agent, consultant or contractor` and `No` with hint `For example, you are applying for yourself, or a company you work for or own`. Back returns to Screen 03. Save and continue validates required answer and goes to Screen 05. |
+| 05 | Contact details and contact language | User provided on 2026-07-03 | Built | Conditional screen shown only when the user selects `Individual` on Screen 03 and `No` on Screen 04. Collects `Name`, `Email address`, `Phone number`, `Address`, and `Contact language`. Back returns to Screen 04. Save and continue validates required answers and goes to Screen 06. |
+| 06 | Which task are you planning on completing? | User provided on 2026-06-25; exact Template layout supplied on 2026-06-26; left-justified body content clarified on 2026-06-26 | Built | Main header: `Apply for permission to stock, remove and supply fish`. Uses long 182px NRW page heading, left-justified 640px content column, visible body copy, radio options: `Stocking fish`, `Supplying fish`, `Removing fish`, Back and Save and continue buttons, task-list link, inline feedback link, and NRW footer link set. Back returns to Screen 05 when the conditional contact-details branch is active, otherwise Screen 04. Save and continue validates required answer. All three task routes branch to Screen 07. |
+| 07 | What is the name of the water? | User provided on 2026-06-25; split-screen GOV.UK pattern agreed on 2026-06-25; shared route confirmed on 2026-06-26 | Built | Shared by supply, stocking, and removal routes. Single-question page using question heading only. Text input label is visually hidden. Required validation. Back returns to Screen 06. Save and continue goes to Screen 08. |
+| 08 | What type of water is it? | User provided on 2026-06-25; split-screen GOV.UK pattern agreed on 2026-06-25; shared route confirmed on 2026-06-26; progressive stillwater questions provided on 2026-06-26 | Built | Shared by supply, stocking, and removal routes. Uses progressive question blocks on the same screen. Asks for water type with options `Canal`, `River`, `Stillwater`. If `Stillwater` is selected, reveals a separate CEFAS registration number question block. If the selected task was `Supplying fish`, also reveals a separate landlocked/on line question block. Back returns to Screen 07. Save and continue goes to Screen 09. |
+| 09 | What is the nearest town/city of your proposed activity? | User provided on 2026-06-26; question information placement clarified on 2026-06-26 | Built | Shared by supply, stocking, and removal routes. Text input question with question information line: `This will appear on your application form`. Back returns to Screen 08. Save and continue goes to Screen 10. |
+| 10 | Provide a National Grid Reference / Provide a what3words (optional) | User provided on 2026-06-26 | Built | Shared by supply, stocking, and removal routes. Two text input question blocks on the same page. National Grid Reference is required. what3words is optional. Back returns to Screen 09. Save and continue goes to Screen 11. |
+| 11 | Are any of the fish a non-native species? | User provided on 2026-06-26 | Built | Shared by supply, stocking, and removal routes. Radio options: `Yes`, `No`, `Unknown`. Required validation. Back returns to Screen 10. Save and continue goes to Screen 12. |
+| 12 | Are there any crayfish present? | User provided on 2026-06-26 | Built | Shared by supply, stocking, and removal routes. Radio options: `Yes`, `No`, `Unknown`. Required validation. Back returns to Screen 11. Save and continue goes to Screen 13. |
+| 13 | Fish | User provided on 2026-06-26; updated to follow supplied progressive disclosure screenshots on 2026-06-26 | Built | Shared by supply, stocking, and removal routes. Progressive add-to-list journey. First state asks for one fish species and uses the standard `Save and continue` button to add it. Added state shows `You have added X type(s) of fish`, a compact list with Change and Remove links, and asks `Do you need to add another type of fish?`. Back returns to Screen 12. If the user answers `No`, Save and continue goes to Screen 14. |
+| 14 | How we use your personal data | User provided on 2026-06-26 | Built | Shared by supply, stocking, and removal routes. Content page with required checkbox: `I have read and understood this information`. Back returns to Screen 13 added-fish state. Save and continue goes to Screen 15. |
+| 15 | Declaration | User provided on 2026-06-26 | Built | Shared by supply, stocking, and removal routes. Declaration page with required checkbox: `To the best of my knowledge and belief, the information I have given is correct`. Back returns to Screen 14. Save and continue reaches the current prototype holding message. |
 
 ## Screen Definition Template
 
@@ -120,34 +125,21 @@ Complete each section of the application.
 
 ### Component Pattern
 
-Task list using the NRW `Summary=Card, Width=Default` component.
+Landing screen using the NRW page shell and grouped category links.
 
 Uses the supplied page template layout:
 
 - `1020px` content width container
 - `48px 16px` content padding
 - left-justified `640px` content column
-- grouped `Summary=Card, Width=Default` task sections
-- semantic summary-list rows with task links on the left and status text on the right
-- `56px` gap between the intro text and task-list sections
+- grouped category sections with heading, supporting copy, section link, and status text
+- `56px` gap between the intro text and landing sections
 
 ### Options Or Fields
 
-Application details:
-
-- Which task are you planning on completing?
-- Water details
-- Location details
-
-Fish and environment:
-
-- Non-native species and crayfish
-- Fish details
-
-Review and submit:
-
-- How we use your personal data
-- Declaration
+- Marine licensing
+- Freshwater fish permits
+- Land access
 
 ### Validation
 

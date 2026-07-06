@@ -1110,94 +1110,6 @@
         </p>
       </section>
 
-      <form class="nrw-screen nrw-template-form" id="licence-for-form" novalidate hidden>
-        <div class="nrw-template-column">
-          <div class="nrw-template-content">
-            <div class="nrw-application-question">
-              <fieldset>
-                <legend>
-                  <h2>Who is the licence for?</h2>
-                </legend>
-
-                <span class="nrw-field-error" id="licence-for-error" hidden></span>
-
-                <div class="nrw-radios">
-                  <label class="nrw-radio-item" for="licence-for-public-body">
-                    <input type="radio" id="licence-for-public-body" name="licenceFor" value="Public body">
-                    <span class="nrw-radio-control" aria-hidden="true"></span>
-                    <span class="nrw-radio-content">
-                      <span class="nrw-radio-label">A public body</span>
-                      <span class="nrw-radio-hint">For example - a council</span>
-                    </span>
-                  </label>
-
-                  <label class="nrw-radio-item" for="licence-for-charity">
-                    <input type="radio" id="licence-for-charity" name="licenceFor" value="Charity">
-                    <span class="nrw-radio-control" aria-hidden="true"></span>
-                    <span class="nrw-radio-content">
-                      <span class="nrw-radio-label">A charity</span>
-                    </span>
-                  </label>
-                  <div class="nrw-radio-reveal" id="licence-for-charity-reveal" hidden>
-                    <div class="nrw-radio-reveal__content">
-                      <div class="prototype-radio-reveal__intro">
-                        <label class="prototype-radio-reveal__label" for="charity-registration-number">Fill in your registration number</label>
-                        <p class="prototype-radio-reveal__hint">If you don’t have a registration number, apply as an individual</p>
-                      </div>
-                      <span class="nrw-field-error" id="charity-registration-number-error" hidden></span>
-                      <input class="nrw-text-input prototype-radio-reveal__input" id="charity-registration-number" name="charityRegistrationNumber" type="text" autocomplete="off" placeholder="10 characters">
-                    </div>
-                  </div>
-
-                  <label class="nrw-radio-item" for="licence-for-company">
-                    <input type="radio" id="licence-for-company" name="licenceFor" value="Company">
-                    <span class="nrw-radio-control" aria-hidden="true"></span>
-                    <span class="nrw-radio-content">
-                      <span class="nrw-radio-label">A company</span>
-                    </span>
-                  </label>
-                  <div class="nrw-radio-reveal" id="licence-for-company-reveal" hidden>
-                    <div class="nrw-radio-reveal__content">
-                      <div class="prototype-radio-reveal__intro">
-                        <label class="prototype-radio-reveal__label" for="company-registration-number">Fill in your registration number</label>
-                        <p class="prototype-radio-reveal__hint">If you don’t have a registration number, apply as an individual</p>
-                      </div>
-                      <span class="nrw-field-error" id="company-registration-number-error" hidden></span>
-                      <input class="nrw-text-input prototype-radio-reveal__input" id="company-registration-number" name="companyRegistrationNumber" type="text" autocomplete="off" placeholder="10 characters">
-                    </div>
-                  </div>
-
-                  <label class="nrw-radio-item" for="licence-for-individual">
-                    <input type="radio" id="licence-for-individual" name="licenceFor" value="Individual">
-                    <span class="nrw-radio-control" aria-hidden="true"></span>
-                    <span class="nrw-radio-content">
-                      <span class="nrw-radio-label">An individual</span>
-                      <span class="nrw-radio-hint">As an individual acting independently</span>
-                    </span>
-                  </label>
-                </div>
-              </fieldset>
-            </div>
-          </div>
-        </div>
-
-        <div class="prototype-template-actions">
-          <div class="nrw-button-row nrw-button-row--template">
-            <button type="button" class="nrw-button nrw-button--secondary nrw-button--back" id="licence-for-back-button">Back</button>
-            <button type="submit" class="nrw-button nrw-button--primary nrw-button--continue">
-              <span>Save and continue</span>
-            </button>
-          </div>
-
-          <p class="prototype-task-list-link"><a href="#">Go back to task list</a></p>
-        </div>
-
-        <p class="prototype-inline-feedback">
-          <span>Is there anything wrong with this page?</span>
-          <a href="#">Give us your feedback</a>
-        </p>
-      </form>
-
       <form class="nrw-screen nrw-template-form" id="acting-on-behalf-form" novalidate hidden>
         <div class="nrw-template-column">
           <div class="nrw-template-content">
@@ -2000,7 +1912,6 @@
       const serviceScreen = document.getElementById("service-screen");
       const taskListScreen = document.getElementById("task-list-screen");
       const completedTaskListScreen = document.getElementById("completed-task-list-screen");
-      const licenceForForm = document.getElementById("licence-for-form");
       const actingOnBehalfForm = document.getElementById("acting-on-behalf-form");
       const contactDetailsForm = document.getElementById("contact-details-form");
       const form = document.getElementById("task-form");
@@ -2015,7 +1926,6 @@
       const declarationForm = document.getElementById("declaration-form");
       const errorSummary = document.getElementById("error-summary");
       const errorList = document.getElementById("error-list");
-      const licenceForError = document.getElementById("licence-for-error");
       const actingOnBehalfError = document.getElementById("acting-on-behalf-error");
       const contactDetailsHeading = document.getElementById("contact-details-heading");
       const contactDetailsIntro = document.getElementById("contact-details-intro");
@@ -2035,12 +1945,6 @@
       const contactPostcode = document.getElementById("contact-postcode");
       const contactPostcodeError = document.getElementById("contact-postcode-error");
       const contactLanguageError = document.getElementById("contact-language-error");
-      const licenceForCharityReveal = document.getElementById("licence-for-charity-reveal");
-      const licenceForCompanyReveal = document.getElementById("licence-for-company-reveal");
-      const charityRegistrationNumber = document.getElementById("charity-registration-number");
-      const charityRegistrationNumberError = document.getElementById("charity-registration-number-error");
-      const companyRegistrationNumber = document.getElementById("company-registration-number");
-      const companyRegistrationNumberError = document.getElementById("company-registration-number-error");
       const taskError = document.getElementById("task-error");
       const waterName = document.getElementById("water-name");
       const waterNameError = document.getElementById("water-name-error");
@@ -2086,7 +1990,6 @@
       const holdingMessageText = document.getElementById("holding-message-text");
       const newPermitButton = document.getElementById("new-permit-button");
       const completedTaskListBackButton = document.getElementById("completed-task-list-back-button");
-      const licenceForBackButton = document.getElementById("licence-for-back-button");
       const actingOnBehalfBackButton = document.getElementById("acting-on-behalf-back-button");
       const contactDetailsBackButton = document.getElementById("contact-details-back-button");
       const backButton = document.getElementById("back-button");
@@ -2109,7 +2012,6 @@
         serviceScreen.hidden = screen !== "service";
         taskListScreen.hidden = screen !== "task-list";
         completedTaskListScreen.hidden = screen !== "completed-task-list";
-        licenceForForm.hidden = screen !== "licence-for";
         actingOnBehalfForm.hidden = screen !== "acting-on-behalf";
         contactDetailsForm.hidden = screen !== "contact-details";
         form.hidden = screen !== "task";
@@ -2143,8 +2045,6 @@
       function clearErrors() {
         errorSummary.hidden = true;
         errorList.innerHTML = "";
-        licenceForError.hidden = true;
-        licenceForError.textContent = "";
         actingOnBehalfError.hidden = true;
         actingOnBehalfError.textContent = "";
         contactCompanyError.hidden = true;
@@ -2164,12 +2064,6 @@
         contactPostcode.removeAttribute("aria-describedby");
         contactLanguageError.hidden = true;
         contactLanguageError.textContent = "";
-        charityRegistrationNumberError.hidden = true;
-        charityRegistrationNumberError.textContent = "";
-        charityRegistrationNumber.removeAttribute("aria-describedby");
-        companyRegistrationNumberError.hidden = true;
-        companyRegistrationNumberError.textContent = "";
-        companyRegistrationNumber.removeAttribute("aria-describedby");
         taskError.hidden = true;
         taskError.textContent = "";
         waterNameError.hidden = true;
@@ -2280,59 +2174,6 @@
         holdingMessage.hidden = true;
         errorSummary.focus();
       }
-
-      function updateLicenceForReveal() {
-        const selected = document.querySelector('input[name="licenceFor"]:checked');
-        const isCharity = selected && selected.value === "Charity";
-        const isCompany = selected && selected.value === "Company";
-        licenceForCharityReveal.hidden = !isCharity;
-        licenceForCompanyReveal.hidden = !isCompany;
-        if (!isCharity) {
-          charityRegistrationNumber.value = "";
-          charityRegistrationNumberError.hidden = true;
-          charityRegistrationNumberError.textContent = "";
-          charityRegistrationNumber.removeAttribute("aria-describedby");
-        }
-        if (!isCompany) {
-          companyRegistrationNumber.value = "";
-          companyRegistrationNumberError.hidden = true;
-          companyRegistrationNumberError.textContent = "";
-          companyRegistrationNumber.removeAttribute("aria-describedby");
-        }
-      }
-
-      licenceForForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-        clearErrors();
-        const selected = document.querySelector('input[name="licenceFor"]:checked');
-        const errors = [];
-        if (!selected) {
-          errors.push(["licence-for-public-body", "Select who the licence is for"]);
-          licenceForError.textContent = "Select who the licence is for";
-          licenceForError.hidden = false;
-        }
-        if (selected && selected.value === "Charity" && !charityRegistrationNumber.value.trim()) {
-          errors.push(["charity-registration-number", "Enter the charity registration number"]);
-          charityRegistrationNumberError.textContent = "Enter the charity registration number";
-          charityRegistrationNumberError.hidden = false;
-          charityRegistrationNumber.setAttribute("aria-describedby", "charity-registration-number-error");
-        }
-        if (selected && selected.value === "Company" && !companyRegistrationNumber.value.trim()) {
-          errors.push(["company-registration-number", "Enter the company registration number"]);
-          companyRegistrationNumberError.textContent = "Enter the company registration number";
-          companyRegistrationNumberError.hidden = false;
-          companyRegistrationNumber.setAttribute("aria-describedby", "company-registration-number-error");
-        }
-        if (errors.length) {
-          errorList.innerHTML = "";
-          errors.forEach(([targetId, message]) => addSummaryError(targetId, message));
-          errorSummary.hidden = false;
-          holdingMessage.hidden = true;
-          errorSummary.focus();
-          return;
-        }
-        showScreen("acting-on-behalf");
-      });
 
       actingOnBehalfForm.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -2905,7 +2746,6 @@
         }
       }
 
-      licenceForBackButton.addEventListener("click", () => showScreen(currentTaskListScreen));
       actingOnBehalfBackButton.addEventListener("click", () => showScreen(currentTaskListScreen));
       contactDetailsBackButton.addEventListener("click", () => showScreen("acting-on-behalf"));
       backButton.addEventListener("click", () => showScreen("contact-details"));
@@ -2918,7 +2758,7 @@
       document.querySelectorAll(".prototype-task-list-link a").forEach((link) => {
         link.addEventListener("click", (event) => {
           event.preventDefault();
-          showScreen(currentTaskListScreen);
+          showScreen("completed-task-list");
         });
       });
       waterNameBackButton.addEventListener("click", () => showScreen("task"));
@@ -2995,9 +2835,6 @@
 
       document.querySelectorAll('input[name="waterType"]').forEach((input) => {
         input.addEventListener("change", updateWaterTypeConditionalQuestions);
-      });
-      document.querySelectorAll('input[name="licenceFor"]').forEach((input) => {
-        input.addEventListener("change", updateLicenceForReveal);
       });
       stillwaterSizeSwitch.addEventListener("click", () => {
         setStillwaterSizeUnit(stillwaterSizeUnit === "acres" ? "hectares" : "acres");

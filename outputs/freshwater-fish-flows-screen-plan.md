@@ -174,8 +174,8 @@ These remain the working freshwater fish permit journey screens, with validation
 
 ## Navigation Rules
 
-- `Go back to task list` returns to the applications dashboard.
-- `Save and go to task list` on the conditional contact-details screen also returns to the applications dashboard.
+- `Go back to task list` returns to `Check your answers before submitting your application`.
+- `Save and go to task list` on the conditional contact-details screen also returns to `Check your answers before submitting your application`.
 - Back behaviour on the new pre-task screens is:
   - Screen 03 back → applications dashboard or completed task-list review, depending on where the user came from
   - Screen 04 back → Screen 03
@@ -184,6 +184,5 @@ These remain the working freshwater fish permit journey screens, with validation
 ## Known Prototype Constraints
 
 - `Marine licensing` and `Land access` are visible only and do not have working journeys.
-- The old `Who is the licence for?` screen remains in the file but is not part of the live new-permit route.
 - The review screen uses fixed example values rather than fully bound live answers.
 - The current implementation is a prototype flow, not a production data model.

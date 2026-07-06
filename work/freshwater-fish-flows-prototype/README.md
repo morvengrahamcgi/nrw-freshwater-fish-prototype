@@ -28,11 +28,12 @@ Use these files before changing the prototype:
 ## Important Behaviour
 
 - Only `Freshwater fish permits` is active on the landing screen.
-- `Apply for a new permit` starts the new permit journey.
+- `Apply for a new permit` now starts at `Are you applying on behalf of someone else?`
+- After that question, the journey shows a contact-details screen.
+- If the user answers `Yes`, it shows the contractor version with `Company name`.
+- If the user answers `No`, it shows the existing `Licence holder details` version.
 - `Continue`, `View`, and `Amend` from the dashboard all open the review screen.
-- The `Licence holder details` screen is conditional and only appears for:
-  - `An individual`
-  - `No` to applying on behalf of someone else
+- The old `Who is the licence for?` screen is no longer part of the live journey.
 
 ## Build Rule
 

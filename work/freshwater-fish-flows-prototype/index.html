@@ -257,6 +257,11 @@
         gap: 8px;
       }
 
+      .prototype-contact-details .prototype-form-group[hidden],
+      .prototype-contact-details .nrw-application-question__body[hidden] {
+        display: none;
+      }
+
       .prototype-contact-details .prototype-form-group + .prototype-form-group,
       .prototype-contact-details .prototype-static-detail--row + .prototype-static-detail--row {
         margin-top: 0;
@@ -952,11 +957,6 @@
                 </div>
                 <dl class="nrw-summary-list">
                   <div class="nrw-summary-list__row">
-                    <dt class="nrw-summary-list__key">The licence is for</dt>
-                    <dd class="nrw-summary-list__value">Individual</dd>
-                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="licence-for">Change</a></dd>
-                  </div>
-                  <div class="nrw-summary-list__row">
                     <dt class="nrw-summary-list__key">Contractor</dt>
                     <dd class="nrw-summary-list__value">No</dd>
                     <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="acting-on-behalf">Change</a></dd>
@@ -1256,11 +1256,15 @@
             <div class="nrw-application-question">
               <div class="nrw-question-stack">
                 <div class="nrw-question-block nrw-question-block--progressive">
-                  <h2>Licence holder details</h2>
+                  <h2 id="contact-details-heading">Licence holder details</h2>
+
+                  <div class="nrw-application-question__body" id="contact-details-intro" hidden>
+                    <p>You must have authority to act on behalf of the licence holder to complete this form</p>
+                  </div>
 
                   <div class="prototype-static-detail">
-                    <h3 class="prototype-static-detail__label">Contact details</h3>
-                    <p class="prototype-static-detail__hint">Contact details won’t appear on the licence</p>
+                    <h3 class="prototype-static-detail__label" id="contact-details-section-heading">Contact details</h3>
+                    <p class="prototype-static-detail__hint" id="contact-details-section-hint">Contact details won’t appear on the licence</p>
                   </div>
 
                   <div class="prototype-static-detail prototype-static-detail--row">
@@ -1277,6 +1281,12 @@
                     <label class="prototype-label" for="contact-phone">Phone number</label>
                     <span class="nrw-field-error" id="contact-phone-error" hidden></span>
                     <input class="nrw-text-input" id="contact-phone" name="contactPhone" type="tel" autocomplete="tel" value="07123 456 789">
+                  </div>
+
+                  <div class="prototype-form-group" id="contact-company-group" hidden>
+                    <label class="prototype-label" for="contact-company">Company name</label>
+                    <span class="nrw-field-error" id="contact-company-error" hidden></span>
+                    <input class="nrw-text-input" id="contact-company" name="contactCompany" type="text" autocomplete="organization">
                   </div>
                 </div>
 
@@ -2007,8 +2017,15 @@
       const errorList = document.getElementById("error-list");
       const licenceForError = document.getElementById("licence-for-error");
       const actingOnBehalfError = document.getElementById("acting-on-behalf-error");
+      const contactDetailsHeading = document.getElementById("contact-details-heading");
+      const contactDetailsIntro = document.getElementById("contact-details-intro");
+      const contactDetailsSectionHeading = document.getElementById("contact-details-section-heading");
+      const contactDetailsSectionHint = document.getElementById("contact-details-section-hint");
       const contactPhone = document.getElementById("contact-phone");
       const contactPhoneError = document.getElementById("contact-phone-error");
+      const contactCompanyGroup = document.getElementById("contact-company-group");
+      const contactCompany = document.getElementById("contact-company");
+      const contactCompanyError = document.getElementById("contact-company-error");
       const contactAddressLine1 = document.getElementById("contact-address-line1");
       const contactAddressLine1Error = document.getElementById("contact-address-line1-error");
       const contactAddressLine2 = document.getElementById("contact-address-line2");
@@ -2110,6 +2127,9 @@
         if (screen === "water-type") {
           updateWaterTypeConditionalQuestions();
         }
+        if (screen === "contact-details") {
+          updateContactDetailsVariant();
+        }
         if (screen === "task-list") {
           currentTaskListScreen = "task-list";
           updateTaskListStatuses();
@@ -2127,6 +2147,9 @@
         licenceForError.textContent = "";
         actingOnBehalfError.hidden = true;
         actingOnBehalfError.textContent = "";
+        contactCompanyError.hidden = true;
+        contactCompanyError.textContent = "";
+        contactCompany.removeAttribute("aria-describedby");
         contactPhoneError.hidden = true;
         contactPhoneError.textContent = "";
         contactPhone.removeAttribute("aria-describedby");
@@ -2200,15 +2223,26 @@
         element.textContent = complete ? "Completed" : started ? "In progress" : "Not started";
       }
 
-      function shouldShowIndividualContactDetails() {
-        const selectedLicenceFor = document.querySelector('input[name="licenceFor"]:checked');
+      function shouldShowAgentContactDetails() {
         const selectedActingOnBehalf = document.querySelector('input[name="actingOnBehalf"]:checked');
-        return Boolean(
-          selectedLicenceFor
-          && selectedLicenceFor.value === "Individual"
-          && selectedActingOnBehalf
-          && selectedActingOnBehalf.value === "No"
-        );
+        return Boolean(selectedActingOnBehalf && selectedActingOnBehalf.value === "Yes");
+      }
+
+      function updateContactDetailsVariant() {
+        const isAgent = shouldShowAgentContactDetails();
+        contactDetailsHeading.textContent = isAgent
+          ? "Your contact details - as the agent, consultant or contractor"
+          : "Licence holder details";
+        contactDetailsIntro.hidden = !isAgent;
+        contactDetailsSectionHeading.textContent = isAgent ? "Your contact details" : "Contact details";
+        contactDetailsSectionHint.hidden = isAgent;
+        contactCompanyGroup.hidden = !isAgent;
+        if (!isAgent) {
+          contactCompany.value = "";
+          contactCompanyError.hidden = true;
+          contactCompanyError.textContent = "";
+          contactCompany.removeAttribute("aria-describedby");
+        }
       }
 
       function updateTaskListStatuses() {
@@ -2314,7 +2348,7 @@
           errorSummary.focus();
           return;
         }
-        showScreen(shouldShowIndividualContactDetails() ? "contact-details" : "task");
+        showScreen("contact-details");
       });
 
       contactDetailsForm.addEventListener("submit", (event) => {
@@ -2328,6 +2362,12 @@
           contactPhoneError.textContent = "Enter the phone number";
           contactPhoneError.hidden = false;
           contactPhone.setAttribute("aria-describedby", "contact-phone-error");
+        }
+        if (shouldShowAgentContactDetails() && !contactCompany.value.trim()) {
+          errors.push(["contact-company", "Enter the company name"]);
+          contactCompanyError.textContent = "Enter the company name";
+          contactCompanyError.hidden = false;
+          contactCompany.setAttribute("aria-describedby", "contact-company-error");
         }
         if (!contactAddressLine1.value.trim()) {
           errors.push(["contact-address-line1", "Enter address line 1"]);
@@ -2866,9 +2906,9 @@
       }
 
       licenceForBackButton.addEventListener("click", () => showScreen(currentTaskListScreen));
-      actingOnBehalfBackButton.addEventListener("click", () => showScreen("licence-for"));
+      actingOnBehalfBackButton.addEventListener("click", () => showScreen(currentTaskListScreen));
       contactDetailsBackButton.addEventListener("click", () => showScreen("acting-on-behalf"));
-      backButton.addEventListener("click", () => showScreen(shouldShowIndividualContactDetails() ? "contact-details" : "acting-on-behalf"));
+      backButton.addEventListener("click", () => showScreen("contact-details"));
       document.querySelectorAll("[data-task-screen]").forEach((link) => {
         link.addEventListener("click", (event) => {
           event.preventDefault();
@@ -2894,7 +2934,7 @@
         showScreen("fish");
       });
       declarationBackButton.addEventListener("click", () => showScreen("personal-data"));
-      newPermitButton.addEventListener("click", () => showScreen("licence-for"));
+      newPermitButton.addEventListener("click", () => showScreen("acting-on-behalf"));
       completedTaskListBackButton.addEventListener("click", () => showScreen("task-list"));
 
       fishList.addEventListener("click", (event) => {

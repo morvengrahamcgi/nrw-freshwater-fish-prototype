@@ -1,0 +1,2845 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Apply for permission to stock, remove and supply fish - Freshwater Fish Flows</title>
+    <link rel="stylesheet" href="./work/nrw-prototype-components/styles/nrw.css">
+    <style>
+      fieldset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+
+      legend {
+        padding: 0;
+      }
+
+      .prototype-error-summary:focus {
+        outline: 4px solid var(--nrw-focus);
+      }
+
+      .prototype-error-summary h2 {
+        margin: 0 0 8px;
+        font-size: 24px;
+        line-height: 29px;
+      }
+
+      .prototype-error-summary ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      .prototype-holding-message {
+        width: min(640px, 100%);
+        margin-top: 32px;
+        padding: 16px;
+        border-left: 6px solid #128300;
+        background: #f0f5f4;
+      }
+
+      .prototype-holding-message h2 {
+        margin: 0 0 8px;
+        color: var(--nrw-heading);
+        font-family: "Gotham Rounded Bold", "Gotham Rounded", Arial, sans-serif;
+        font-size: 24px;
+        line-height: 29px;
+      }
+
+      .prototype-holding-message[hidden] {
+        display: none;
+      }
+
+      .prototype-task-list-link {
+        margin: 0;
+      }
+
+      .prototype-task-list-link a,
+      .prototype-inline-feedback a {
+        font-family: "Gotham Rounded Bold", "Gotham Rounded", Arial, sans-serif;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .prototype-inline-feedback {
+        margin: 0;
+      }
+
+      .prototype-inline-feedback span {
+        margin-right: 8px;
+      }
+
+      .prototype-template-actions {
+        width: 303px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+      }
+
+      .prototype-task-list {
+        width: min(640px, 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 56px;
+      }
+
+      .prototype-check-answers {
+        width: min(640px, 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 56px;
+      }
+
+      .prototype-check-answers__intro {
+        width: min(640px, 100%);
+      }
+
+      .prototype-check-answers__intro h2 {
+        margin: 0;
+        color: var(--nrw-heading);
+        font-family: "Gotham Rounded Bold", "Gotham Rounded", Arial, sans-serif;
+        font-size: 30px;
+        line-height: 37px;
+      }
+
+      .prototype-check-answers .nrw-summary-card {
+        width: min(640px, 100%);
+      }
+
+      .prototype-check-answers .nrw-summary-list__row {
+        min-height: 57px;
+        grid-template-columns: minmax(180px, 220px) minmax(0, 1fr) auto;
+        align-items: center;
+      }
+
+      .prototype-check-answers .nrw-summary-list__key {
+        padding-left: 24px;
+        padding-right: 8px;
+      }
+
+      .prototype-check-answers .nrw-summary-list__value {
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+
+      .prototype-check-answers .nrw-summary-list__actions {
+        padding-left: 8px;
+        padding-right: 24px;
+        text-align: right;
+      }
+
+      .prototype-check-answers .nrw-summary-list__actions a {
+        color: var(--nrw-link);
+        font-family: "Gotham Rounded Bold", "Gotham Rounded", Arial, sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .prototype-check-answers__actions {
+        width: min(640px, 100%);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .prototype-radio-reveal__intro {
+        width: min(582px, 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+
+      .prototype-radio-reveal__label {
+        margin: 0;
+        color: var(--nrw-body);
+        font-family: "Gotham Rounded Bold", "Gotham Rounded", Arial, sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 700;
+      }
+
+      .prototype-radio-reveal__hint {
+        margin: 0;
+        color: var(--nrw-body);
+        font-family: "Gotham Rounded Book", "Gotham Rounded", Arial, sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+      }
+
+      .prototype-radio-reveal__input {
+        width: 148px;
+      }
+
+      .prototype-static-detail {
+        width: min(640px, 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .prototype-static-detail--row {
+        gap: 8px;
+      }
+
+      .prototype-static-detail__label {
+        margin: 0;
+        color: var(--nrw-body);
+        font-family: "Gotham Rounded Bold", "Gotham Rounded", Arial, sans-serif;
+        font-size: 24px;
+        line-height: 29px;
+        font-weight: 700;
+      }
+
+      .prototype-static-detail__hint {
+        margin: 0;
+        color: var(--nrw-body);
+      }
+
+      .prototype-static-detail__value {
+        margin: 0;
+        color: var(--nrw-body);
+      }
+
+      .prototype-static-detail__key {
+        margin: 0;
+        color: var(--nrw-heading);
+        font-family: "Gotham Rounded Bold", "Gotham Rounded", Arial, sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 700;
+      }
+
+      .prototype-static-detail__text {
+        margin: 0;
+        color: var(--nrw-body);
+        font-family: "Gotham Rounded Book", "Gotham Rounded", Arial, sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+      }
+
+      .prototype-contact-details .nrw-question-stack {
+        width: min(640px, 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 56px;
+      }
+
+      .prototype-contact-details .nrw-question-block {
+        width: min(640px, 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+      }
+
+      .prototype-contact-details .prototype-static-detail {
+        gap: 16px;
+      }
+
+      .prototype-contact-details .prototype-static-detail--row {
+        gap: 8px;
+      }
+
+      .prototype-contact-details .prototype-form-group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .prototype-contact-details .prototype-form-group[hidden],
+      .prototype-contact-details .nrw-application-question__body[hidden] {
+        display: none;
+      }
+
+      .prototype-contact-details .prototype-form-group + .prototype-form-group,
+      .prototype-contact-details .prototype-static-detail--row + .prototype-static-detail--row {
+        margin-top: 0;
+      }
+
+      .prototype-contact-details .prototype-form-group .prototype-label {
+        margin-bottom: 0;
+        color: var(--nrw-body);
+        font-size: 16px;
+        line-height: 24px;
+      }
+
+      .prototype-contact-details .nrw-text-input {
+        width: min(640px, 100%);
+      }
+
+      .prototype-contact-details fieldset .nrw-application-question__body {
+        margin-bottom: 16px;
+      }
+
+      .prototype-contact-details fieldset .nrw-application-question__body p {
+        margin-bottom: 0;
+      }
+
+      .prototype-landing {
+        width: min(640px, 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 56px;
+      }
+
+      .prototype-landing__intro {
+        width: min(640px, 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .prototype-landing__intro h2 {
+        margin: 0;
+        color: var(--nrw-heading);
+        font-family: "Gotham Rounded Bold", "Gotham Rounded", Arial, sans-serif;
+        font-size: 30px;
+        line-height: 37px;
+      }
+
+      .prototype-landing__intro p {
+        margin: 0;
+      }
+
+      .prototype-landing__sections {
+        width: min(640px, 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+      }
+
+      .prototype-landing__section {
+        width: min(640px, 100%);
+        padding: 0 0 32px;
+        border-bottom: 1px solid #a1a1a1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .prototype-landing__section + .prototype-landing__section {
+        padding-top: 32px;
+      }
+
+      .prototype-landing__section h3 {
+        margin: 0;
+        color: var(--nrw-heading);
+        font-family: "Gotham Rounded Bold", "Gotham Rounded", Arial, sans-serif;
+        font-size: 30px;
+        line-height: 37px;
+      }
+
+      .prototype-landing__section p {
+        margin: 0;
+      }
+
+      .prototype-landing__actions {
+        width: min(640px, 100%);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .prototype-landing__link {
+        color: var(--nrw-link);
+        font-family: "Gotham Rounded Bold", "Gotham Rounded", Arial, sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .prototype-landing__status {
+        color: var(--nrw-body);
+        font-family: "Gotham Rounded Book", "Gotham Rounded", Arial, sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+        white-space: nowrap;
+      }
+
+      .prototype-applications-screen {
+        width: min(988px, 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 56px;
+      }
+
+      .prototype-applications-section {
+        width: min(988px, 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+      }
+
+      .prototype-applications-section h2 {
+        margin: 0;
+        color: var(--nrw-heading);
+        font-family: "Gotham Rounded Bold", "Gotham Rounded", Arial, sans-serif;
+        font-size: 30px;
+        line-height: 37px;
+      }
+
+      .prototype-applications-table {
+        width: min(988px, 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .prototype-applications-table__header,
+      .prototype-applications-table__row {
+        width: 100%;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(120px, 1fr) minmax(120px, 1fr) minmax(160px, 1fr);
+        column-gap: 12px;
+        align-items: start;
+      }
+
+      .prototype-applications-table__header {
+        padding-bottom: 16px;
+        border-bottom: 1px solid #a1a1a1;
+      }
+
+      .prototype-applications-table__row {
+        padding: 16px 0 0;
+        border-bottom: 1px solid #a1a1a1;
+        padding-bottom: 16px;
+      }
+
+      .prototype-applications-table__heading {
+        color: var(--nrw-heading);
+        font-family: "Gotham Rounded Bold", "Gotham Rounded", Arial, sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 700;
+      }
+
+      .prototype-applications-table__cell {
+        color: var(--nrw-body);
+        font-family: "Gotham Rounded Book", "Gotham Rounded", Arial, sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+        min-width: 0;
+      }
+
+      .prototype-applications-table__cell--actions {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+      }
+
+      .prototype-applications-table__action {
+        color: var(--nrw-link);
+        font-family: "Gotham Rounded Bold", "Gotham Rounded", Arial, sans-serif;
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .prototype-landing__link[aria-disabled="true"] {
+        color: #777777;
+        cursor: default;
+        pointer-events: none;
+        text-decoration: none;
+      }
+
+      .prototype-task-list__card {
+        width: min(640px, 100%);
+      }
+
+      .prototype-task-list__card .nrw-summary-card__title {
+        width: 100%;
+      }
+
+      .prototype-task-list__summary .nrw-summary-list__row {
+        min-height: 57px;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+      }
+
+      .prototype-task-list__summary .nrw-summary-list__key {
+        padding-left: 24px;
+        padding-right: 8px;
+      }
+
+      .prototype-task-list__summary .nrw-summary-list__value {
+        padding-left: 8px;
+        padding-right: 24px;
+      }
+
+      .prototype-task-list__summary a {
+        color: var(--nrw-link);
+        font-family: "Gotham Rounded Bold", "Gotham Rounded", Arial, sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .prototype-task-list__status {
+        color: var(--nrw-body);
+        font-family: "Gotham Rounded Book", "Gotham Rounded", Arial, sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+        white-space: nowrap;
+      }
+
+      .prototype-form-group {
+        width: min(640px, 100%);
+        margin: 0;
+      }
+
+      .prototype-form-group:last-child {
+        margin-bottom: 0;
+      }
+
+      .prototype-label,
+      .prototype-legend {
+        display: block;
+        margin: 0 0 10px;
+        color: var(--nrw-heading);
+        font-family: "Gotham Rounded Bold", "Gotham Rounded", Arial, sans-serif;
+        font-size: 24px;
+        line-height: 29px;
+      }
+
+      .prototype-screen-actions {
+        width: 303px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+      }
+
+      .prototype-repeat-list {
+        width: min(640px, 100%);
+        display: flex;
+        flex-direction: column;
+        gap: 56px;
+      }
+
+      .prototype-fish-page {
+        gap: 56px;
+      }
+
+      .prototype-fish-page .nrw-question-block__text h2 {
+        margin: 0;
+      }
+
+      .prototype-fish-entry-panel,
+      .prototype-fish-summary-panel {
+        width: min(640px, 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 56px;
+      }
+
+      .prototype-fish-entry-panel[hidden],
+      .prototype-fish-summary-panel[hidden] {
+        display: none;
+      }
+
+      .prototype-repeat-card {
+        width: min(640px, 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 56px;
+      }
+
+      .nrw-application-question .prototype-repeat-card {
+        gap: 56px;
+      }
+
+      .prototype-repeat-card__header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .prototype-repeat-card__title {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        border: 0;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+
+      .prototype-fish-question {
+        width: min(640px, 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+      }
+
+      .prototype-fish-question__text {
+        width: min(640px, 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .prototype-fish-question h3 {
+        margin: 0;
+        color: var(--nrw-heading);
+        font-family: "Gotham Rounded Bold", "Gotham Rounded", Arial, sans-serif;
+        font-size: 30px;
+        line-height: 37px;
+      }
+
+      .prototype-fish-question__body {
+        margin: 0;
+        color: var(--nrw-body);
+        font-family: "Gotham Rounded Book", "Gotham Rounded", Arial, sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+      }
+
+      .prototype-fish-question .nrw-text-input,
+      .prototype-fish-question .prototype-select {
+        width: min(640px, 100%);
+        height: 48px;
+        padding: 12px 16px;
+      }
+
+      .prototype-link-button {
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: var(--nrw-link);
+        font-family: "Gotham Rounded Bold", "Gotham Rounded", Arial, sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .prototype-link-button:focus {
+        outline: 3px solid var(--nrw-focus);
+        outline-offset: 2px;
+      }
+
+      .prototype-select {
+        width: min(240px, 100%);
+        min-height: 48px;
+        padding: 10px 36px 10px 12px;
+        border: 2px solid var(--nrw-border);
+        border-radius: 0;
+        background: var(--nrw-white);
+        color: var(--nrw-body);
+        font: inherit;
+      }
+
+      .prototype-measurement-input[hidden] {
+        display: none;
+      }
+
+      .prototype-measurement-input {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+      }
+
+      .prototype-fish-summary {
+        width: min(640px, 100%);
+      }
+
+      .prototype-fish-summary .nrw-summary-list {
+        width: min(640px, 100%);
+      }
+
+      .prototype-fish-summary .nrw-summary-list__row {
+        grid-template-columns: 1fr 1fr auto auto;
+        column-gap: 16px;
+        align-items: center;
+      }
+
+      .prototype-fish-summary .nrw-summary-list__key {
+        padding-left: 0;
+      }
+
+      .prototype-fish-summary .nrw-summary-list__value {
+        padding-right: 8px;
+      }
+
+      .prototype-fish-summary .nrw-summary-list__actions {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      @media (max-width: 768px) {
+        .nrw-top-nav,
+        .nrw-top-nav__inner {
+          height: auto;
+        }
+
+        .nrw-top-nav__inner,
+        .nrw-nav-actions,
+        .nrw-button-row {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .nrw-top-nav__inner {
+          padding: 0 16px;
+        }
+
+        .nrw-logo-block,
+        .nrw-nav-actions,
+        .nrw-language-block,
+        .nrw-sign-in-block {
+          width: 100%;
+        }
+
+        .nrw-logo-block {
+          align-items: flex-start;
+        }
+
+        .nrw-page-heading {
+          height: auto;
+          min-height: 123px;
+        }
+
+        .nrw-page-heading__title,
+        .nrw-page-heading h1 {
+          font-size: 36px;
+          line-height: 44px;
+        }
+
+        .nrw-question-block h2 {
+          font-size: 24px;
+          line-height: 29px;
+        }
+
+        .prototype-landing__actions {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .prototype-applications-table__header,
+        .prototype-applications-table__row {
+          grid-template-columns: 1fr;
+          row-gap: 8px;
+        }
+
+        .prototype-check-answers__actions {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="nrw-top-nav">
+      <div class="nrw-top-nav__inner">
+        <div class="nrw-logo-block" aria-label="Natural Resources Wales">
+          <div class="nrw-logo-frame">
+            <div class="nrw-logo" aria-hidden="true">
+              <img class="nrw-logo__image" src="./work/nrw-prototype-components/assets/nrw-logo.svg" alt="">
+            </div>
+          </div>
+        </div>
+
+        <nav class="nrw-nav-actions" aria-label="Service">
+          <div class="nrw-language-block">
+            <a href="#">Cymraeg</a>
+          </div>
+          <div class="nrw-sign-in-block">
+            <a class="nrw-sign-in-link" href="#">
+              <span>Sign in</span>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <div class="nrw-page-heading nrw-page-heading--long">
+      <div class="nrw-page-heading__inner">
+        <div class="nrw-page-heading__content">
+          <h1 class="nrw-page-heading__title">Freshwater fish applications, licenses and permits</h1>
+        </div>
+      </div>
+    </div>
+
+    <main class="nrw-main nrw-main--template" id="main-content">
+      <div class="nrw-error-summary prototype-error-summary" id="error-summary" tabindex="-1" hidden>
+        <h2>There is a problem</h2>
+        <ul id="error-list"></ul>
+      </div>
+
+      <section class="nrw-screen nrw-template-form" id="service-screen">
+        <div class="nrw-template-column">
+          <div class="nrw-template-content">
+            <div class="prototype-landing">
+              <div class="prototype-landing__intro">
+                <h2>Select a service</h2>
+              </div>
+
+              <div class="prototype-landing__sections" aria-label="Service categories">
+                <section class="prototype-landing__section" aria-labelledby="marine-licensing-title">
+                  <h3 id="marine-licensing-title">Marine licensing</h3>
+                  <div class="prototype-landing__actions">
+                    <a class="prototype-landing__link" href="#" aria-disabled="true">Marine licences and applications for band 1 and band 2</a>
+                  </div>
+                </section>
+
+                <section class="prototype-landing__section" aria-labelledby="freshwater-fish-title">
+                  <h3 id="freshwater-fish-title">Freshwater fish permits</h3>
+                  <div class="prototype-landing__actions">
+                    <a class="prototype-landing__link" href="#" data-task-screen="task-list">Fish stocking, removal and supply permits</a>
+                  </div>
+                </section>
+
+                <section class="prototype-landing__section" aria-labelledby="land-access-title">
+                  <h3 id="land-access-title">Land access</h3>
+                  <div class="prototype-landing__actions">
+                    <a class="prototype-landing__link" href="#" aria-disabled="true">Applications for permission to use the land we manage </a>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="prototype-inline-feedback">
+          <span>Is there anything wrong with this page?</span>
+          <a href="#">Give us your feedback</a>
+        </p>
+      </section>
+
+      <section class="nrw-screen nrw-template-form" id="task-list-screen" hidden>
+        <div class="nrw-template-column">
+          <div class="nrw-template-content">
+            <div class="prototype-applications-screen">
+              <section class="prototype-applications-section" aria-labelledby="applications-title">
+                <h2 id="applications-title">Applications in progress</h2>
+
+                <div class="prototype-applications-table" aria-label="Freshwater fish applications">
+                  <div class="prototype-applications-table__header" role="row">
+                    <div class="prototype-applications-table__heading" role="columnheader">Water name</div>
+                    <div class="prototype-applications-table__heading" role="columnheader">Case number</div>
+                    <div class="prototype-applications-table__heading" role="columnheader">Status</div>
+                    <div class="prototype-applications-table__heading" role="columnheader">Actions</div>
+                  </div>
+
+                  <div class="prototype-applications-table__row" role="row">
+                    <div class="prototype-applications-table__cell">Canal c</div>
+                    <div class="prototype-applications-table__cell">FP25001</div>
+                    <div class="prototype-applications-table__cell" id="application-section-status">Draft</div>
+                    <div class="prototype-applications-table__cell prototype-applications-table__cell--actions">
+                      <a class="prototype-applications-table__action" href="#" data-task-screen="completed-task-list">Continue</a>
+                      <a class="prototype-applications-table__action" href="#">Delete</a>
+                    </div>
+                  </div>
+
+                  <div class="prototype-applications-table__row" role="row">
+                    <div class="prototype-applications-table__cell">Llyn Glas</div>
+                    <div class="prototype-applications-table__cell">FP25002</div>
+                    <div class="prototype-applications-table__cell">Submitted</div>
+                    <div class="prototype-applications-table__cell prototype-applications-table__cell--actions">
+                      <a class="prototype-applications-table__action" href="#" data-task-screen="completed-task-list">Continue</a>
+                      <a class="prototype-applications-table__action" href="#">Delete</a>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="prototype-applications-section" aria-labelledby="permits-title">
+                <h2 id="permits-title">Permits</h2>
+
+                <div class="prototype-applications-table" aria-label="Freshwater fish permits">
+                  <div class="prototype-applications-table__header" role="row">
+                    <div class="prototype-applications-table__heading" role="columnheader">Water name</div>
+                    <div class="prototype-applications-table__heading" role="columnheader">Case number</div>
+                    <div class="prototype-applications-table__heading" role="columnheader">Status</div>
+                    <div class="prototype-applications-table__heading" role="columnheader">Actions</div>
+                  </div>
+
+                  <div class="prototype-applications-table__row" role="row">
+                    <div class="prototype-applications-table__cell">River Teifi</div>
+                    <div class="prototype-applications-table__cell">FP24091</div>
+                    <div class="prototype-applications-table__cell">Active</div>
+                    <div class="prototype-applications-table__cell prototype-applications-table__cell--actions">
+                      <a class="prototype-applications-table__action" href="#" data-task-screen="completed-task-list">View</a>
+                      <a class="prototype-applications-table__action" href="#" data-task-screen="completed-task-list">Amend</a>
+                    </div>
+                  </div>
+
+                  <div class="prototype-applications-table__row" role="row">
+                    <div class="prototype-applications-table__cell">Llyn Celyn</div>
+                    <div class="prototype-applications-table__cell">FP23114</div>
+                    <div class="prototype-applications-table__cell">Expired</div>
+                    <div class="prototype-applications-table__cell prototype-applications-table__cell--actions">
+                      <a class="prototype-applications-table__action" href="#" data-task-screen="completed-task-list">View</a>
+                      <a class="prototype-applications-table__action" href="#" data-task-screen="completed-task-list">Amend</a>
+                    </div>
+                  </div>
+
+                  <div class="prototype-applications-table__row" role="row">
+                    <div class="prototype-applications-table__cell">Afon Dyfi</div>
+                    <div class="prototype-applications-table__cell">FP24033</div>
+                    <div class="prototype-applications-table__cell">Rejected</div>
+                    <div class="prototype-applications-table__cell prototype-applications-table__cell--actions">
+                      <a class="prototype-applications-table__action" href="#" data-task-screen="completed-task-list">View</a>
+                      <a class="prototype-applications-table__action" href="#" data-task-screen="completed-task-list">Amend</a>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <div class="prototype-check-answers__actions">
+                <button type="button" class="nrw-button nrw-button--primary" id="new-permit-button">
+                  <span>Apply for a new permit</span>
+                </button>
+              </div>
+
+              <span class="nrw-visually-hidden" id="task-status">Not started</span>
+              <span class="nrw-visually-hidden" id="water-details-status">Not started</span>
+              <span class="nrw-visually-hidden" id="location-details-status">Not started</span>
+              <span class="nrw-visually-hidden" id="environment-status">Not started</span>
+              <span class="nrw-visually-hidden" id="fish-details-status">Not started</span>
+              <span class="nrw-visually-hidden" id="fish-section-status">Not started</span>
+              <span class="nrw-visually-hidden" id="personal-data-status">Not started</span>
+              <span class="nrw-visually-hidden" id="declaration-status">Not started</span>
+              <span class="nrw-visually-hidden" id="review-section-status">Not started</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="prototype-inline-feedback">
+          <span>Is there anything wrong with this page?</span>
+          <a href="#">Give us your feedback</a>
+        </p>
+      </section>
+
+      <section class="nrw-screen nrw-template-form" id="completed-task-list-screen" hidden>
+        <div class="nrw-template-column">
+          <div class="nrw-template-content">
+            <div class="prototype-check-answers">
+              <div class="prototype-check-answers__intro">
+                <h2>Check your answers before submitting your application</h2>
+              </div>
+
+              <section class="nrw-summary-card" aria-labelledby="completed-application-details-title">
+                <div class="nrw-summary-card__header">
+                  <h3 class="nrw-summary-card__title" id="completed-application-details-title">Licence holder details</h3>
+                </div>
+                <dl class="nrw-summary-list">
+                  <div class="nrw-summary-list__row">
+                    <dt class="nrw-summary-list__key">Contractor</dt>
+                    <dd class="nrw-summary-list__value">No</dd>
+                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="acting-on-behalf">Change</a></dd>
+                  </div>
+                  <div class="nrw-summary-list__row">
+                    <dt class="nrw-summary-list__key">Name</dt>
+                    <dd class="nrw-summary-list__value">Jane Doe</dd>
+                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="contact-details">Change</a></dd>
+                  </div>
+                  <div class="nrw-summary-list__row">
+                    <dt class="nrw-summary-list__key">Email address</dt>
+                    <dd class="nrw-summary-list__value">janedoe@email.com</dd>
+                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="contact-details">Change</a></dd>
+                  </div>
+                  <div class="nrw-summary-list__row">
+                    <dt class="nrw-summary-list__key">Phone number</dt>
+                    <dd class="nrw-summary-list__value">0123456789</dd>
+                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="contact-details">Change</a></dd>
+                  </div>
+                  <div class="nrw-summary-list__row">
+                    <dt class="nrw-summary-list__key">Address</dt>
+                    <dd class="nrw-summary-list__value">123 Streetname, Townname...</dd>
+                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="contact-details">Change</a></dd>
+                  </div>
+                  <div class="nrw-summary-list__row">
+                    <dt class="nrw-summary-list__key">Contact language</dt>
+                    <dd class="nrw-summary-list__value">English</dd>
+                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="contact-details">Change</a></dd>
+                  </div>
+                </dl>
+              </section>
+
+              <section class="nrw-summary-card" aria-labelledby="completed-permit-title">
+                <div class="nrw-summary-card__header">
+                  <h3 class="nrw-summary-card__title" id="completed-permit-title">Permit</h3>
+                </div>
+                <dl class="nrw-summary-list">
+                  <div class="nrw-summary-list__row">
+                    <dt class="nrw-summary-list__key">Permit type</dt>
+                    <dd class="nrw-summary-list__value">Stocking</dd>
+                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="task">Change</a></dd>
+                  </div>
+                  <div class="nrw-summary-list__row">
+                    <dt class="nrw-summary-list__key">Name of water</dt>
+                    <dd class="nrw-summary-list__value">Name</dd>
+                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="water-name">Change</a></dd>
+                  </div>
+                  <div class="nrw-summary-list__row">
+                    <dt class="nrw-summary-list__key">Type of water</dt>
+                    <dd class="nrw-summary-list__value">Stillwater</dd>
+                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="water-type">Change</a></dd>
+                  </div>
+                  <div class="nrw-summary-list__row">
+                    <dt class="nrw-summary-list__key">Registration number</dt>
+                    <dd class="nrw-summary-list__value">123456</dd>
+                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="water-type">Change</a></dd>
+                  </div>
+                  <div class="nrw-summary-list__row">
+                    <dt class="nrw-summary-list__key">Size</dt>
+                    <dd class="nrw-summary-list__value">12 acres</dd>
+                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="water-type">Change</a></dd>
+                  </div>
+                </dl>
+              </section>
+
+              <section class="nrw-summary-card" aria-labelledby="completed-location-title">
+                <div class="nrw-summary-card__header">
+                  <h3 class="nrw-summary-card__title" id="completed-location-title">Location</h3>
+                </div>
+                <dl class="nrw-summary-list">
+                  <div class="nrw-summary-list__row">
+                    <dt class="nrw-summary-list__key">Nearest town/city</dt>
+                    <dd class="nrw-summary-list__value">Cardiff</dd>
+                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="location">Change</a></dd>
+                  </div>
+                  <div class="nrw-summary-list__row">
+                    <dt class="nrw-summary-list__key">Grid reference</dt>
+                    <dd class="nrw-summary-list__value">123456</dd>
+                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="grid-reference">Change</a></dd>
+                  </div>
+                  <div class="nrw-summary-list__row">
+                    <dt class="nrw-summary-list__key">Conservation status</dt>
+                    <dd class="nrw-summary-list__value">None</dd>
+                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="grid-reference">Change</a></dd>
+                  </div>
+                </dl>
+              </section>
+
+              <section class="nrw-summary-card" aria-labelledby="completed-fish-title">
+                <div class="nrw-summary-card__header">
+                  <h3 class="nrw-summary-card__title" id="completed-fish-title">Fish</h3>
+                </div>
+                <dl class="nrw-summary-list">
+                  <div class="nrw-summary-list__row">
+                    <dt class="nrw-summary-list__key">Non-native species</dt>
+                    <dd class="nrw-summary-list__value">No</dd>
+                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="non-native-species">Change</a></dd>
+                  </div>
+                  <div class="nrw-summary-list__row">
+                    <dt class="nrw-summary-list__key">Crayfish present</dt>
+                    <dd class="nrw-summary-list__value">None</dd>
+                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="crayfish">Change</a></dd>
+                  </div>
+                  <div class="nrw-summary-list__row">
+                    <dt class="nrw-summary-list__key">Fish</dt>
+                    <dd class="nrw-summary-list__value">Trout, Carp</dd>
+                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="fish">Change</a></dd>
+                  </div>
+                </dl>
+              </section>
+
+              <section class="nrw-summary-card" aria-labelledby="completed-privacy-title">
+                <div class="nrw-summary-card__header">
+                  <h3 class="nrw-summary-card__title" id="completed-privacy-title">Privacy notice</h3>
+                </div>
+                <dl class="nrw-summary-list">
+                  <div class="nrw-summary-list__row">
+                    <dt class="nrw-summary-list__key">Privacy notice</dt>
+                    <dd class="nrw-summary-list__value">I’ve read and understood</dd>
+                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="personal-data">Change</a></dd>
+                  </div>
+                </dl>
+              </section>
+
+              <section class="nrw-summary-card" aria-labelledby="completed-declaration-title">
+                <div class="nrw-summary-card__header">
+                  <h3 class="nrw-summary-card__title" id="completed-declaration-title">Declaration</h3>
+                </div>
+                <dl class="nrw-summary-list">
+                  <div class="nrw-summary-list__row">
+                    <dt class="nrw-summary-list__key">Declaration</dt>
+                    <dd class="nrw-summary-list__value">The information is correct</dd>
+                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="declaration">Change</a></dd>
+                  </div>
+                </dl>
+              </section>
+
+              <div class="prototype-check-answers__actions">
+                <button type="button" class="nrw-button nrw-button--secondary nrw-button--back" id="completed-task-list-back-button">Back</button>
+                <button type="button" class="nrw-button nrw-button--primary">
+                  <span>Complete</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="prototype-inline-feedback">
+          <span>Is there anything wrong with this page?</span>
+          <a href="#">Give us your feedback</a>
+        </p>
+      </section>
+
+      <form class="nrw-screen nrw-template-form" id="acting-on-behalf-form" novalidate hidden>
+        <div class="nrw-template-column">
+          <div class="nrw-template-content">
+            <div class="nrw-application-question">
+              <fieldset>
+                <legend>
+                  <h2>Are you applying on behalf of someone else?</h2>
+                </legend>
+
+                <span class="nrw-field-error" id="acting-on-behalf-error" hidden></span>
+
+                <div class="nrw-radios">
+                  <label class="nrw-radio-item" for="acting-on-behalf-yes">
+                    <input type="radio" id="acting-on-behalf-yes" name="actingOnBehalf" value="Yes">
+                    <span class="nrw-radio-control" aria-hidden="true"></span>
+                    <span class="nrw-radio-content">
+                      <span class="nrw-radio-label">Yes</span>
+                      <span class="nrw-radio-hint">For example, you are an agent, consultant or contractor</span>
+                    </span>
+                  </label>
+
+                  <label class="nrw-radio-item" for="acting-on-behalf-no">
+                    <input type="radio" id="acting-on-behalf-no" name="actingOnBehalf" value="No">
+                    <span class="nrw-radio-control" aria-hidden="true"></span>
+                    <span class="nrw-radio-content">
+                      <span class="nrw-radio-label">No</span>
+                      <span class="nrw-radio-hint">For example, you are applying for yourself, or a company you work for or own</span>
+                    </span>
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+
+        <div class="prototype-template-actions">
+          <div class="nrw-button-row nrw-button-row--template">
+            <button type="button" class="nrw-button nrw-button--secondary nrw-button--back" id="acting-on-behalf-back-button">Back</button>
+            <button type="submit" class="nrw-button nrw-button--primary nrw-button--continue">
+              <span>Save and continue</span>
+            </button>
+          </div>
+
+          <p class="prototype-task-list-link"><a href="#">Go back to task list</a></p>
+        </div>
+
+        <p class="prototype-inline-feedback">
+          <span>Is there anything wrong with this page?</span>
+          <a href="#">Give us your feedback</a>
+        </p>
+      </form>
+
+      <form class="nrw-screen nrw-template-form prototype-contact-details" id="contact-details-form" novalidate hidden>
+        <div class="nrw-template-column">
+          <div class="nrw-template-content">
+            <div class="nrw-application-question">
+              <div class="nrw-question-stack">
+                <div class="nrw-question-block nrw-question-block--progressive">
+                  <h2 id="contact-details-heading">Licence holder details</h2>
+
+                  <div class="nrw-application-question__body" id="contact-details-intro" hidden>
+                    <p>You must have authority to act on behalf of the licence holder to complete this form</p>
+                  </div>
+
+                  <div class="prototype-static-detail">
+                    <h3 class="prototype-static-detail__label" id="contact-details-section-heading">Contact details</h3>
+                    <p class="prototype-static-detail__hint" id="contact-details-section-hint">Contact details won’t appear on the licence</p>
+                  </div>
+
+                  <div class="prototype-static-detail prototype-static-detail--row">
+                    <p class="prototype-static-detail__key">Your name</p>
+                    <p class="prototype-static-detail__text">[Login name]</p>
+                  </div>
+
+                  <div class="prototype-static-detail prototype-static-detail--row">
+                    <p class="prototype-static-detail__key">Your email</p>
+                    <p class="prototype-static-detail__text">[Login email]</p>
+                  </div>
+
+                  <div class="prototype-form-group" id="contact-phone-group">
+                    <label class="prototype-label" for="contact-phone">Phone number</label>
+                    <span class="nrw-field-error" id="contact-phone-error" hidden></span>
+                    <input class="nrw-text-input" id="contact-phone" name="contactPhone" type="tel" autocomplete="tel" value="07123 456 789">
+                  </div>
+
+                  <div class="prototype-form-group" id="contact-company-group" hidden>
+                    <label class="prototype-label" for="contact-company">Company name</label>
+                    <span class="nrw-field-error" id="contact-company-error" hidden></span>
+                    <input class="nrw-text-input" id="contact-company" name="contactCompany" type="text" autocomplete="organization">
+                  </div>
+                </div>
+
+                <div class="nrw-question-block nrw-question-block--progressive">
+                  <div class="prototype-static-detail">
+                    <h3 class="prototype-static-detail__label">Address</h3>
+                  </div>
+
+                  <div class="prototype-form-group" id="contact-address-line1-group">
+                    <label class="prototype-label" for="contact-address-line1">Address line 1</label>
+                    <span class="nrw-field-error" id="contact-address-line1-error" hidden></span>
+                    <input class="nrw-text-input" id="contact-address-line1" name="contactAddressLine1" type="text" autocomplete="address-line1">
+                  </div>
+
+                  <div class="prototype-form-group" id="contact-address-line2-group">
+                    <label class="prototype-label" for="contact-address-line2">Address line 2 (optional)</label>
+                    <span class="nrw-field-error" id="contact-address-line2-error" hidden></span>
+                    <input class="nrw-text-input" id="contact-address-line2" name="contactAddressLine2" type="text" autocomplete="address-line2">
+                  </div>
+
+                  <div class="prototype-form-group" id="contact-town-city-group">
+                    <label class="prototype-label" for="contact-town-city">Town or city</label>
+                    <span class="nrw-field-error" id="contact-town-city-error" hidden></span>
+                    <input class="nrw-text-input" id="contact-town-city" name="contactTownCity" type="text" autocomplete="address-level2">
+                  </div>
+
+                  <div class="prototype-form-group" id="contact-country-group">
+                    <label class="prototype-label" for="contact-country">Country (optional)</label>
+                    <span class="nrw-field-error" id="contact-country-error" hidden></span>
+                    <input class="nrw-text-input" id="contact-country" name="contactCountry" type="text" autocomplete="country-name">
+                  </div>
+
+                  <div class="prototype-form-group" id="contact-postcode-group">
+                    <label class="prototype-label" for="contact-postcode">Post code</label>
+                    <span class="nrw-field-error" id="contact-postcode-error" hidden></span>
+                    <input class="nrw-text-input" id="contact-postcode" name="contactPostcode" type="text" autocomplete="postal-code">
+                  </div>
+                </div>
+
+                <div class="nrw-question-block nrw-question-block--progressive">
+                  <fieldset>
+                    <legend>
+                      <h2>Preferred contact language</h2>
+                    </legend>
+
+                    <div class="nrw-application-question__body">
+                      <p>Select the language we should use to contact you</p>
+                    </div>
+
+                    <span class="nrw-field-error" id="contact-language-error" hidden></span>
+
+                    <div class="nrw-radios">
+                      <label class="nrw-radio-item" for="contact-language-welsh">
+                        <input type="radio" id="contact-language-welsh" name="contactLanguage" value="Welsh">
+                        <span class="nrw-radio-control" aria-hidden="true"></span>
+                        <span class="nrw-radio-content">
+                          <span class="nrw-radio-label">Welsh</span>
+                        </span>
+                      </label>
+
+                      <label class="nrw-radio-item" for="contact-language-english">
+                        <input type="radio" id="contact-language-english" name="contactLanguage" value="English">
+                        <span class="nrw-radio-control" aria-hidden="true"></span>
+                        <span class="nrw-radio-content">
+                          <span class="nrw-radio-label">English</span>
+                        </span>
+                      </label>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="prototype-screen-actions">
+          <div class="nrw-button-row nrw-button-row--template">
+            <button type="button" class="nrw-button nrw-button--secondary nrw-button--back" id="contact-details-back-button">Back</button>
+            <button type="submit" class="nrw-button nrw-button--primary nrw-button--continue">
+              <span>Save and continue</span>
+            </button>
+          </div>
+
+          <p class="prototype-task-list-link"><a href="#">Save and go to task list</a></p>
+        </div>
+
+        <p class="prototype-inline-feedback">
+          <span>Is there anything wrong with this page?</span>
+          <a href="#">Give us your feedback</a>
+        </p>
+      </form>
+
+      <form class="nrw-screen nrw-template-form" id="task-form" novalidate hidden>
+        <div class="nrw-template-column">
+          <div class="nrw-template-content">
+            <div class="nrw-application-question">
+              <fieldset>
+                <legend>
+                  <h2>Which type of permit are you applying for?</h2>
+                </legend>
+
+                <div class="nrw-application-question__body">
+                  <p>You need to apply for consent to:</p>
+                  <ul>
+                    <li>remove fish from your fishery other than by rod and line</li>
+                    <li>introduce fish into your fishery (a site permit)</li>
+                    <li>supply fish to fisheries, or move fish between sites (a supplier permit)</li>
+                  </ul>
+                  <p>These permits are free.</p>
+                </div>
+
+                <span class="nrw-field-error" id="task-error" hidden></span>
+
+                <div class="nrw-radios">
+                  <label class="nrw-radio-item" for="task-stocking">
+                    <input type="radio" id="task-stocking" name="task" value="Stocking fish">
+                    <span class="nrw-radio-control" aria-hidden="true"></span>
+                    <span class="nrw-radio-content">
+                      <span class="nrw-radio-label">Stocking fish</span>
+                    </span>
+                  </label>
+
+                  <label class="nrw-radio-item" for="task-supplying">
+                    <input type="radio" id="task-supplying" name="task" value="Supplying fish">
+                    <span class="nrw-radio-control" aria-hidden="true"></span>
+                    <span class="nrw-radio-content">
+                      <span class="nrw-radio-label">Supplying fish</span>
+                    </span>
+                  </label>
+
+                  <label class="nrw-radio-item" for="task-removing">
+                    <input type="radio" id="task-removing" name="task" value="Removing fish">
+                    <span class="nrw-radio-control" aria-hidden="true"></span>
+                    <span class="nrw-radio-content">
+                      <span class="nrw-radio-label">Removing fish</span>
+                    </span>
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="prototype-template-actions">
+          <div class="nrw-button-row nrw-button-row--template">
+            <button type="button" class="nrw-button nrw-button--secondary nrw-button--back" id="back-button">Back</button>
+            <button type="submit" class="nrw-button nrw-button--primary nrw-button--continue">
+              <span>Save and continue</span>
+            </button>
+          </div>
+
+          <p class="prototype-task-list-link"><a href="#">Go back to task list</a></p>
+        </div>
+
+        <p class="prototype-inline-feedback">
+          <span>Is there anything wrong with this page?</span>
+          <a href="#">Give us your feedback</a>
+        </p>
+      </form>
+
+      <form class="nrw-screen nrw-template-form" id="water-name-form" novalidate hidden>
+        <div class="nrw-template-column">
+          <div class="nrw-template-content">
+            <div class="nrw-application-question">
+              <h2>What is the name of the water?</h2>
+
+              <div class="prototype-form-group" id="water-name-group">
+                <label class="nrw-visually-hidden" for="water-name">What is the name of the water?</label>
+                <span class="nrw-field-error" id="water-name-error" hidden></span>
+                <input class="nrw-text-input" id="water-name" name="waterName" type="text" autocomplete="off">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="prototype-screen-actions">
+          <div class="nrw-button-row nrw-button-row--template">
+            <button type="button" class="nrw-button nrw-button--secondary nrw-button--back" id="water-name-back-button">Back</button>
+            <button type="submit" class="nrw-button nrw-button--primary nrw-button--continue">
+              <span>Save and continue</span>
+            </button>
+          </div>
+
+          <p class="prototype-task-list-link"><a href="#">Go back to task list</a></p>
+        </div>
+
+        <p class="prototype-inline-feedback">
+          <span>Is there anything wrong with this page?</span>
+          <a href="#">Give us your feedback</a>
+        </p>
+      </form>
+
+      <form class="nrw-screen nrw-template-form" id="water-type-form" novalidate hidden>
+        <div class="nrw-template-column">
+          <div class="nrw-template-content">
+            <div class="nrw-application-question">
+              <div class="nrw-question-stack">
+                <div class="nrw-question-block nrw-question-block--progressive">
+                  <fieldset>
+                    <legend>
+                      <h2>What type of water is it?</h2>
+                    </legend>
+
+                    <span class="nrw-field-error" id="water-type-error" hidden></span>
+
+                    <div class="nrw-radios">
+                      <label class="nrw-radio-item" for="water-type-canal">
+                        <input type="radio" id="water-type-canal" name="waterType" value="Canal">
+                        <span class="nrw-radio-control" aria-hidden="true"></span>
+                        <span class="nrw-radio-content">
+                          <span class="nrw-radio-label">Canal</span>
+                        </span>
+                      </label>
+
+                      <label class="nrw-radio-item" for="water-type-river">
+                        <input type="radio" id="water-type-river" name="waterType" value="River">
+                        <span class="nrw-radio-control" aria-hidden="true"></span>
+                        <span class="nrw-radio-content">
+                          <span class="nrw-radio-label">River</span>
+                        </span>
+                      </label>
+
+                      <label class="nrw-radio-item" for="water-type-stillwater">
+                        <input type="radio" id="water-type-stillwater" name="waterType" value="Stillwater">
+                        <span class="nrw-radio-control" aria-hidden="true"></span>
+                        <span class="nrw-radio-content">
+                          <span class="nrw-radio-label">Stillwater</span>
+                        </span>
+                      </label>
+                    </div>
+                  </fieldset>
+                </div>
+
+                <div class="nrw-question-block nrw-question-block--progressive" id="stillwater-questions" hidden>
+                  <h2>What is your CEFAS registration number?</h2>
+                  <div class="prototype-form-group" id="cefas-number-group">
+                    <label class="nrw-visually-hidden" for="cefas-number">What is your CEFAS registration number?</label>
+                    <span class="nrw-field-error" id="cefas-number-error" hidden></span>
+                    <input class="nrw-text-input" id="cefas-number" name="cefasNumber" type="text" autocomplete="off">
+                  </div>
+                </div>
+
+                <div class="nrw-question-block nrw-question-block--progressive" id="stillwater-size-group" hidden>
+                  <h2>What is the size of the water?</h2>
+
+                  <div class="nrw-unit-input" id="stillwater-size-value-group">
+                    <div class="nrw-unit-input__field">
+                      <label class="nrw-unit-input__label" id="stillwater-size-label" for="stillwater-size">Acres</label>
+                      <span class="nrw-field-error" id="stillwater-size-error" hidden></span>
+                      <input class="nrw-text-input nrw-text-input--unit" id="stillwater-size" name="stillwaterSize" type="text" inputmode="decimal" autocomplete="off">
+                      <input id="stillwater-size-unit" name="stillwaterSizeUnit" type="hidden" value="acres">
+                    </div>
+
+                    <button class="nrw-unit-input__switch" id="stillwater-size-switch" type="button">Switch to hectares</button>
+                  </div>
+                </div>
+
+                <div class="nrw-question-block nrw-question-block--progressive" id="landlocked-online-group" hidden>
+                  <fieldset>
+                    <legend>
+                      <h2>Is the water landlocked or on line?</h2>
+                    </legend>
+                    <span class="nrw-field-error" id="landlocked-online-error" hidden></span>
+
+                    <div class="nrw-radios">
+                      <label class="nrw-radio-item" for="landlocked-online-yes">
+                        <input type="radio" id="landlocked-online-yes" name="landlockedOnline" value="Yes">
+                        <span class="nrw-radio-control" aria-hidden="true"></span>
+                        <span class="nrw-radio-content">
+                          <span class="nrw-radio-label">Yes</span>
+                        </span>
+                      </label>
+
+                      <label class="nrw-radio-item" for="landlocked-online-no">
+                        <input type="radio" id="landlocked-online-no" name="landlockedOnline" value="No">
+                        <span class="nrw-radio-control" aria-hidden="true"></span>
+                        <span class="nrw-radio-content">
+                          <span class="nrw-radio-label">No</span>
+                        </span>
+                      </label>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="prototype-screen-actions">
+          <div class="nrw-button-row nrw-button-row--template">
+            <button type="button" class="nrw-button nrw-button--secondary nrw-button--back" id="water-type-back-button">Back</button>
+            <button type="submit" class="nrw-button nrw-button--primary nrw-button--continue">
+              <span>Save and continue</span>
+            </button>
+          </div>
+
+          <p class="prototype-task-list-link"><a href="#">Go back to task list</a></p>
+        </div>
+
+        <p class="prototype-inline-feedback">
+          <span>Is there anything wrong with this page?</span>
+          <a href="#">Give us your feedback</a>
+        </p>
+      </form>
+
+      <form class="nrw-screen nrw-template-form" id="location-form" novalidate hidden>
+        <div class="nrw-template-column">
+          <div class="nrw-template-content">
+            <div class="nrw-application-question">
+              <h2>What is the nearest town/city of your proposed activity?</h2>
+              <div class="nrw-application-question__body">
+                <p>This will appear on your application form</p>
+              </div>
+
+              <div class="prototype-form-group" id="location-group">
+                <label class="nrw-visually-hidden" for="location">What is the nearest town/city of your proposed activity?</label>
+                <span class="nrw-field-error" id="location-error" hidden></span>
+                <input class="nrw-text-input" id="location" name="location" type="text" autocomplete="address-level2">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="prototype-screen-actions">
+          <div class="nrw-button-row nrw-button-row--template">
+            <button type="button" class="nrw-button nrw-button--secondary nrw-button--back" id="location-back-button">Back</button>
+            <button type="submit" class="nrw-button nrw-button--primary nrw-button--continue">
+              <span>Save and continue</span>
+            </button>
+          </div>
+
+          <p class="prototype-task-list-link"><a href="#">Go back to task list</a></p>
+        </div>
+
+        <p class="prototype-inline-feedback">
+          <span>Is there anything wrong with this page?</span>
+          <a href="#">Give us your feedback</a>
+        </p>
+      </form>
+
+      <form class="nrw-screen nrw-template-form" id="grid-reference-form" novalidate hidden>
+        <div class="nrw-template-column">
+          <div class="nrw-template-content">
+            <div class="nrw-application-question">
+              <div class="nrw-question-stack">
+                <div class="nrw-question-block nrw-question-block--progressive">
+                  <div class="nrw-question-block__text">
+                    <h2>Provide a National Grid Reference</h2>
+                    <div class="nrw-application-question__body">
+                      <p>You can search for your water’s National Grid Reference on <a href="https://gridreferencefinder.com/" rel="noreferrer" target="_blank">UK Grid Reference Finder</a></p>
+                    </div>
+                  </div>
+
+                  <div class="prototype-form-group" id="national-grid-reference-group">
+                    <label class="nrw-visually-hidden" for="national-grid-reference">Provide a National Grid Reference</label>
+                    <span class="nrw-field-error" id="national-grid-reference-error" hidden></span>
+                    <input class="nrw-text-input" id="national-grid-reference" name="nationalGridReference" type="text" autocomplete="off">
+                  </div>
+                </div>
+
+                <div class="nrw-question-block nrw-question-block--progressive">
+                  <div class="nrw-question-block__text">
+                    <h2>Provide a what3words (optional)</h2>
+                    <div class="nrw-application-question__body">
+                      <p>This will help us locate your body of water more accurately. You can search for it on <a href="https://what3words.com/" rel="noreferrer" target="_blank">what3words</a></p>
+                    </div>
+                  </div>
+
+                  <div class="prototype-form-group" id="what-three-words-group">
+                    <label class="nrw-visually-hidden" for="what-three-words">Provide a what3words</label>
+                    <input class="nrw-text-input" id="what-three-words" name="whatThreeWords" type="text" autocomplete="off">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="prototype-screen-actions">
+          <div class="nrw-button-row nrw-button-row--template">
+            <button type="button" class="nrw-button nrw-button--secondary nrw-button--back" id="grid-reference-back-button">Back</button>
+            <button type="submit" class="nrw-button nrw-button--primary nrw-button--continue">
+              <span>Save and continue</span>
+            </button>
+          </div>
+
+          <p class="prototype-task-list-link"><a href="#">Go back to task list</a></p>
+        </div>
+
+        <p class="prototype-inline-feedback">
+          <span>Is there anything wrong with this page?</span>
+          <a href="#">Give us your feedback</a>
+        </p>
+      </form>
+
+      <form class="nrw-screen nrw-template-form" id="non-native-species-form" novalidate hidden>
+        <div class="nrw-template-column">
+          <div class="nrw-template-content">
+            <div class="nrw-application-question">
+              <fieldset>
+                <legend>
+                  <h2>Are any of the fish a non-native species?</h2>
+                </legend>
+
+                <span class="nrw-field-error" id="non-native-species-error" hidden></span>
+
+                <div class="nrw-radios">
+                  <label class="nrw-radio-item" for="non-native-species-yes">
+                    <input type="radio" id="non-native-species-yes" name="nonNativeSpecies" value="Yes">
+                    <span class="nrw-radio-control" aria-hidden="true"></span>
+                    <span class="nrw-radio-content">
+                      <span class="nrw-radio-label">Yes</span>
+                    </span>
+                  </label>
+
+                  <label class="nrw-radio-item" for="non-native-species-no">
+                    <input type="radio" id="non-native-species-no" name="nonNativeSpecies" value="No">
+                    <span class="nrw-radio-control" aria-hidden="true"></span>
+                    <span class="nrw-radio-content">
+                      <span class="nrw-radio-label">No</span>
+                    </span>
+                  </label>
+
+                  <label class="nrw-radio-item" for="non-native-species-unknown">
+                    <input type="radio" id="non-native-species-unknown" name="nonNativeSpecies" value="Unknown">
+                    <span class="nrw-radio-control" aria-hidden="true"></span>
+                    <span class="nrw-radio-content">
+                      <span class="nrw-radio-label">Unknown</span>
+                    </span>
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+
+        <div class="prototype-screen-actions">
+          <div class="nrw-button-row nrw-button-row--template">
+            <button type="button" class="nrw-button nrw-button--secondary nrw-button--back" id="non-native-species-back-button">Back</button>
+            <button type="submit" class="nrw-button nrw-button--primary nrw-button--continue">
+              <span>Save and continue</span>
+            </button>
+          </div>
+
+          <p class="prototype-task-list-link"><a href="#">Go back to task list</a></p>
+        </div>
+
+        <p class="prototype-inline-feedback">
+          <span>Is there anything wrong with this page?</span>
+          <a href="#">Give us your feedback</a>
+        </p>
+      </form>
+
+      <form class="nrw-screen nrw-template-form" id="crayfish-form" novalidate hidden>
+        <div class="nrw-template-column">
+          <div class="nrw-template-content">
+            <div class="nrw-application-question">
+              <fieldset>
+                <legend>
+                  <h2>Are there any crayfish present?</h2>
+                </legend>
+
+                <span class="nrw-field-error" id="crayfish-error" hidden></span>
+
+                <div class="nrw-radios">
+                  <label class="nrw-radio-item" for="crayfish-yes">
+                    <input type="radio" id="crayfish-yes" name="crayfish" value="Yes">
+                    <span class="nrw-radio-control" aria-hidden="true"></span>
+                    <span class="nrw-radio-content">
+                      <span class="nrw-radio-label">Yes</span>
+                    </span>
+                  </label>
+
+                  <label class="nrw-radio-item" for="crayfish-no">
+                    <input type="radio" id="crayfish-no" name="crayfish" value="No">
+                    <span class="nrw-radio-control" aria-hidden="true"></span>
+                    <span class="nrw-radio-content">
+                      <span class="nrw-radio-label">No</span>
+                    </span>
+                  </label>
+
+                  <label class="nrw-radio-item" for="crayfish-unknown">
+                    <input type="radio" id="crayfish-unknown" name="crayfish" value="Unknown">
+                    <span class="nrw-radio-control" aria-hidden="true"></span>
+                    <span class="nrw-radio-content">
+                      <span class="nrw-radio-label">Unknown</span>
+                    </span>
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+
+        <div class="prototype-screen-actions">
+          <div class="nrw-button-row nrw-button-row--template">
+            <button type="button" class="nrw-button nrw-button--secondary nrw-button--back" id="crayfish-back-button">Back</button>
+            <button type="submit" class="nrw-button nrw-button--primary nrw-button--continue">
+              <span>Save and continue</span>
+            </button>
+          </div>
+
+          <p class="prototype-task-list-link"><a href="#">Go back to task list</a></p>
+        </div>
+
+        <p class="prototype-inline-feedback">
+          <span>Is there anything wrong with this page?</span>
+          <a href="#">Give us your feedback</a>
+        </p>
+      </form>
+
+      <form class="nrw-screen nrw-template-form" id="fish-form" novalidate hidden>
+        <div class="nrw-template-column">
+          <div class="nrw-template-content">
+            <div class="nrw-application-question prototype-fish-page">
+              <div class="prototype-fish-entry-panel" id="fish-entry-panel">
+                <div class="nrw-question-block__text">
+                  <h2>Fish</h2>
+                  <div class="nrw-application-question__body">
+                    <p>Add in fish one species at a time</p>
+                  </div>
+                </div>
+
+                <div class="prototype-repeat-list" id="fish-list"></div>
+              </div>
+
+              <div class="prototype-fish-summary-panel" id="fish-summary-panel" hidden>
+                <div class="nrw-question-block__text">
+                  <h2 id="fish-summary-heading">You have added 0 types of fish</h2>
+                </div>
+
+                <div class="prototype-repeat-list" id="fish-summary-list"></div>
+
+                <fieldset class="prototype-form-group">
+                  <legend class="prototype-legend">Do you need to add another type of fish?</legend>
+                  <span class="nrw-field-error" id="add-another-fish-error" hidden></span>
+                  <div class="nrw-radios">
+                    <label class="nrw-radio-item" for="add-another-fish-yes">
+                      <input type="radio" id="add-another-fish-yes" name="addAnotherFish" value="Yes">
+                      <span class="nrw-radio-control" aria-hidden="true"></span>
+                      <span class="nrw-radio-content">
+                        <span class="nrw-radio-label">Yes</span>
+                      </span>
+                    </label>
+
+                    <label class="nrw-radio-item" for="add-another-fish-no">
+                      <input type="radio" id="add-another-fish-no" name="addAnotherFish" value="No">
+                      <span class="nrw-radio-control" aria-hidden="true"></span>
+                      <span class="nrw-radio-content">
+                        <span class="nrw-radio-label">No</span>
+                      </span>
+                    </label>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="prototype-screen-actions">
+          <div class="nrw-button-row nrw-button-row--template">
+            <button type="button" class="nrw-button nrw-button--secondary nrw-button--back" id="fish-back-button">Back</button>
+            <button type="submit" class="nrw-button nrw-button--primary nrw-button--continue">
+              <span>Save and continue</span>
+            </button>
+          </div>
+
+          <p class="prototype-task-list-link"><a href="#">Go back to task list</a></p>
+        </div>
+
+        <p class="prototype-inline-feedback">
+          <span>Is there anything wrong with this page?</span>
+          <a href="#">Give us your feedback</a>
+        </p>
+      </form>
+
+      <form class="nrw-screen nrw-template-form" id="personal-data-form" novalidate hidden>
+        <div class="nrw-template-column">
+          <div class="nrw-template-content">
+            <div class="nrw-application-question">
+              <fieldset>
+                <legend>
+                  <h2>How we use your personal data</h2>
+                </legend>
+                <div class="nrw-application-question__body">
+                  <p>We’ll use the information you provide in line with UK data protection laws.</p>
+                  <p>For more about how we collect, store and use your data, read our <a href="#" target="_blank" rel="noreferrer">privacy notice (opens in a new tab)</a>.</p>
+                </div>
+
+                <span class="nrw-field-error" id="personal-data-error" hidden></span>
+                <div class="nrw-checkbox-group">
+                  <label class="nrw-checkbox-item" for="personal-data-understood">
+                    <input type="checkbox" id="personal-data-understood" name="personalDataUnderstood" value="Yes">
+                    <span class="nrw-checkbox-control" aria-hidden="true"></span>
+                    <span class="nrw-checkbox-content">
+                      <span class="nrw-checkbox-label">I have read and understood this information</span>
+                    </span>
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+
+        <div class="prototype-screen-actions">
+          <div class="nrw-button-row nrw-button-row--template">
+            <button type="button" class="nrw-button nrw-button--secondary nrw-button--back" id="personal-data-back-button">Back</button>
+            <button type="submit" class="nrw-button nrw-button--primary nrw-button--continue">
+              <span>Save and continue</span>
+            </button>
+          </div>
+
+          <p class="prototype-task-list-link"><a href="#">Go back to task list</a></p>
+        </div>
+
+        <p class="prototype-inline-feedback">
+          <span>Is there anything wrong with this page?</span>
+          <a href="#">Give us your feedback</a>
+        </p>
+      </form>
+
+      <form class="nrw-screen nrw-template-form" id="declaration-form" novalidate hidden>
+        <div class="nrw-template-column">
+          <div class="nrw-template-content">
+            <div class="nrw-application-question">
+              <fieldset>
+                <legend>
+                  <h2>Declaration</h2>
+                </legend>
+                <div class="nrw-application-question__body">
+                  <p>If you give any information which is incomplete or inaccurate:</p>
+                  <ul>
+                    <li>we will return your application; and/or</li>
+                    <li>we will not grant consent.</li>
+                  </ul>
+                </div>
+
+                <span class="nrw-field-error" id="declaration-error" hidden></span>
+                <div class="nrw-checkbox-group">
+                  <label class="nrw-checkbox-item" for="declaration-correct">
+                    <input type="checkbox" id="declaration-correct" name="declarationCorrect" value="Yes">
+                    <span class="nrw-checkbox-control" aria-hidden="true"></span>
+                    <span class="nrw-checkbox-content">
+                      <span class="nrw-checkbox-label">To the best of my knowledge and belief, the information I have given is correct</span>
+                    </span>
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+
+        <div class="prototype-screen-actions">
+          <div class="nrw-button-row nrw-button-row--template">
+            <button type="button" class="nrw-button nrw-button--secondary nrw-button--back" id="declaration-back-button">Back</button>
+            <button type="submit" class="nrw-button nrw-button--primary nrw-button--continue">
+              <span>Save and continue</span>
+            </button>
+          </div>
+
+          <p class="prototype-task-list-link"><a href="#">Go back to task list</a></p>
+        </div>
+
+        <p class="prototype-inline-feedback">
+          <span>Is there anything wrong with this page?</span>
+          <a href="#">Give us your feedback</a>
+        </p>
+      </form>
+
+      <section class="prototype-holding-message" id="holding-message" aria-live="polite" hidden>
+        <h2>Task saved</h2>
+        <p id="holding-message-text"></p>
+        <p>The next screen has not been defined yet.</p>
+      </section>
+    </main>
+
+    <footer class="nrw-footer">
+      <div class="nrw-footer__rule"></div>
+      <div class="nrw-footer__inner">
+        <ul class="nrw-footer__links">
+          <li class="nrw-footer__link-item"><a href="#">Accessibility</a></li>
+          <li class="nrw-footer__link-divider" aria-hidden="true"></li>
+          <li class="nrw-footer__link-item"><a href="#">Privacy notice</a></li>
+          <li class="nrw-footer__link-divider" aria-hidden="true"></li>
+          <li class="nrw-footer__link-item"><a href="#">Welsh Language Standards</a></li>
+          <li class="nrw-footer__link-divider" aria-hidden="true"></li>
+          <li class="nrw-footer__link-item"><a href="#">Sitemap</a></li>
+        </ul>
+        <div class="nrw-footer__divider"></div>
+        <div class="nrw-footer__brand-row">
+          <div class="nrw-footer__logo" aria-label="Natural Resources Wales">
+            <svg class="nrw-footer__logo-mark" viewBox="0 0 48 45" aria-hidden="true" focusable="false">
+              <polygon points="24,0 47,12 47,33 24,45 1,33 1,12" fill="#A1A1A1"></polygon>
+              <polygon points="24,0 47,12 24,24 1,12" fill="#B8B8B8"></polygon>
+              <polygon points="1,12 24,24 24,45 1,33" fill="#8F8F8F"></polygon>
+              <polygon points="47,12 24,24 24,45 47,33" fill="#777777"></polygon>
+              <polygon points="13,22 24,16 35,22 24,28" fill="#58595B"></polygon>
+            </svg>
+            <div class="nrw-footer__logo-text" aria-hidden="true">
+              <span>Cyfoeth Naturiol Cymru</span>
+              <span>Natural Resources Wales</span>
+            </div>
+          </div>
+          <p class="nrw-footer__copyright">&copy; Natural Resources Wales</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const serviceScreen = document.getElementById("service-screen");
+      const taskListScreen = document.getElementById("task-list-screen");
+      const completedTaskListScreen = document.getElementById("completed-task-list-screen");
+      const actingOnBehalfForm = document.getElementById("acting-on-behalf-form");
+      const contactDetailsForm = document.getElementById("contact-details-form");
+      const form = document.getElementById("task-form");
+      const waterNameForm = document.getElementById("water-name-form");
+      const waterTypeForm = document.getElementById("water-type-form");
+      const locationForm = document.getElementById("location-form");
+      const gridReferenceForm = document.getElementById("grid-reference-form");
+      const nonNativeSpeciesForm = document.getElementById("non-native-species-form");
+      const crayfishForm = document.getElementById("crayfish-form");
+      const fishForm = document.getElementById("fish-form");
+      const personalDataForm = document.getElementById("personal-data-form");
+      const declarationForm = document.getElementById("declaration-form");
+      const errorSummary = document.getElementById("error-summary");
+      const errorList = document.getElementById("error-list");
+      const actingOnBehalfError = document.getElementById("acting-on-behalf-error");
+      const contactDetailsHeading = document.getElementById("contact-details-heading");
+      const contactDetailsIntro = document.getElementById("contact-details-intro");
+      const contactDetailsSectionHeading = document.getElementById("contact-details-section-heading");
+      const contactDetailsSectionHint = document.getElementById("contact-details-section-hint");
+      const contactPhone = document.getElementById("contact-phone");
+      const contactPhoneError = document.getElementById("contact-phone-error");
+      const contactCompanyGroup = document.getElementById("contact-company-group");
+      const contactCompany = document.getElementById("contact-company");
+      const contactCompanyError = document.getElementById("contact-company-error");
+      const contactAddressLine1 = document.getElementById("contact-address-line1");
+      const contactAddressLine1Error = document.getElementById("contact-address-line1-error");
+      const contactAddressLine2 = document.getElementById("contact-address-line2");
+      const contactTownCity = document.getElementById("contact-town-city");
+      const contactTownCityError = document.getElementById("contact-town-city-error");
+      const contactCountry = document.getElementById("contact-country");
+      const contactPostcode = document.getElementById("contact-postcode");
+      const contactPostcodeError = document.getElementById("contact-postcode-error");
+      const contactLanguageError = document.getElementById("contact-language-error");
+      const taskError = document.getElementById("task-error");
+      const waterName = document.getElementById("water-name");
+      const waterNameError = document.getElementById("water-name-error");
+      const waterTypeError = document.getElementById("water-type-error");
+      const cefasNumber = document.getElementById("cefas-number");
+      const cefasNumberError = document.getElementById("cefas-number-error");
+      const stillwaterQuestions = document.getElementById("stillwater-questions");
+      const stillwaterSizeGroup = document.getElementById("stillwater-size-group");
+      const stillwaterSize = document.getElementById("stillwater-size");
+      const stillwaterSizeUnitInput = document.getElementById("stillwater-size-unit");
+      const stillwaterSizeLabel = document.getElementById("stillwater-size-label");
+      const stillwaterSizeSwitch = document.getElementById("stillwater-size-switch");
+      const stillwaterSizeError = document.getElementById("stillwater-size-error");
+      const landlockedOnlineGroup = document.getElementById("landlocked-online-group");
+      const landlockedOnlineError = document.getElementById("landlocked-online-error");
+      const locationInput = document.getElementById("location");
+      const locationError = document.getElementById("location-error");
+      const nationalGridReference = document.getElementById("national-grid-reference");
+      const nationalGridReferenceError = document.getElementById("national-grid-reference-error");
+      const nonNativeSpeciesError = document.getElementById("non-native-species-error");
+      const crayfishError = document.getElementById("crayfish-error");
+      const fishEntryPanel = document.getElementById("fish-entry-panel");
+      const fishSummaryPanel = document.getElementById("fish-summary-panel");
+      const fishList = document.getElementById("fish-list");
+      const fishSummaryList = document.getElementById("fish-summary-list");
+      const fishSummaryHeading = document.getElementById("fish-summary-heading");
+      const addAnotherFishError = document.getElementById("add-another-fish-error");
+      const personalDataUnderstood = document.getElementById("personal-data-understood");
+      const personalDataError = document.getElementById("personal-data-error");
+      const declarationCorrect = document.getElementById("declaration-correct");
+      const declarationError = document.getElementById("declaration-error");
+      const applicationSectionStatus = document.getElementById("application-section-status");
+      const fishSectionStatus = document.getElementById("fish-section-status");
+      const reviewSectionStatus = document.getElementById("review-section-status");
+      const taskStatus = document.getElementById("task-status");
+      const waterDetailsStatus = document.getElementById("water-details-status");
+      const locationDetailsStatus = document.getElementById("location-details-status");
+      const environmentStatus = document.getElementById("environment-status");
+      const fishDetailsStatus = document.getElementById("fish-details-status");
+      const personalDataStatus = document.getElementById("personal-data-status");
+      const declarationStatus = document.getElementById("declaration-status");
+      const holdingMessage = document.getElementById("holding-message");
+      const holdingMessageText = document.getElementById("holding-message-text");
+      const newPermitButton = document.getElementById("new-permit-button");
+      const completedTaskListBackButton = document.getElementById("completed-task-list-back-button");
+      const actingOnBehalfBackButton = document.getElementById("acting-on-behalf-back-button");
+      const contactDetailsBackButton = document.getElementById("contact-details-back-button");
+      const backButton = document.getElementById("back-button");
+      const waterNameBackButton = document.getElementById("water-name-back-button");
+      const waterTypeBackButton = document.getElementById("water-type-back-button");
+      const locationBackButton = document.getElementById("location-back-button");
+      const gridReferenceBackButton = document.getElementById("grid-reference-back-button");
+      const nonNativeSpeciesBackButton = document.getElementById("non-native-species-back-button");
+      const crayfishBackButton = document.getElementById("crayfish-back-button");
+      const fishBackButton = document.getElementById("fish-back-button");
+      const personalDataBackButton = document.getElementById("personal-data-back-button");
+      const declarationBackButton = document.getElementById("declaration-back-button");
+      let currentTaskListScreen = "task-list";
+      let selectedTask = "";
+      let stillwaterSizeUnit = "acres";
+      let fishEntryCount = 0;
+      const savedFishEntries = [];
+
+      function showScreen(screen) {
+        serviceScreen.hidden = screen !== "service";
+        taskListScreen.hidden = screen !== "task-list";
+        completedTaskListScreen.hidden = screen !== "completed-task-list";
+        actingOnBehalfForm.hidden = screen !== "acting-on-behalf";
+        contactDetailsForm.hidden = screen !== "contact-details";
+        form.hidden = screen !== "task";
+        waterNameForm.hidden = screen !== "water-name";
+        waterTypeForm.hidden = screen !== "water-type";
+        locationForm.hidden = screen !== "location";
+        gridReferenceForm.hidden = screen !== "grid-reference";
+        nonNativeSpeciesForm.hidden = screen !== "non-native-species";
+        crayfishForm.hidden = screen !== "crayfish";
+        fishForm.hidden = screen !== "fish";
+        personalDataForm.hidden = screen !== "personal-data";
+        declarationForm.hidden = screen !== "declaration";
+        holdingMessage.hidden = true;
+        clearErrors();
+        if (screen === "water-type") {
+          updateWaterTypeConditionalQuestions();
+        }
+        if (screen === "contact-details") {
+          updateContactDetailsVariant();
+        }
+        if (screen === "task-list") {
+          currentTaskListScreen = "task-list";
+          updateTaskListStatuses();
+        }
+        if (screen === "completed-task-list") {
+          currentTaskListScreen = "completed-task-list";
+        }
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function clearErrors() {
+        errorSummary.hidden = true;
+        errorList.innerHTML = "";
+        actingOnBehalfError.hidden = true;
+        actingOnBehalfError.textContent = "";
+        contactCompanyError.hidden = true;
+        contactCompanyError.textContent = "";
+        contactCompany.removeAttribute("aria-describedby");
+        contactPhoneError.hidden = true;
+        contactPhoneError.textContent = "";
+        contactPhone.removeAttribute("aria-describedby");
+        contactAddressLine1Error.hidden = true;
+        contactAddressLine1Error.textContent = "";
+        contactAddressLine1.removeAttribute("aria-describedby");
+        contactTownCityError.hidden = true;
+        contactTownCityError.textContent = "";
+        contactTownCity.removeAttribute("aria-describedby");
+        contactPostcodeError.hidden = true;
+        contactPostcodeError.textContent = "";
+        contactPostcode.removeAttribute("aria-describedby");
+        contactLanguageError.hidden = true;
+        contactLanguageError.textContent = "";
+        taskError.hidden = true;
+        taskError.textContent = "";
+        waterNameError.hidden = true;
+        waterNameError.textContent = "";
+        waterName.removeAttribute("aria-describedby");
+        waterTypeError.hidden = true;
+        waterTypeError.textContent = "";
+        cefasNumberError.hidden = true;
+        cefasNumberError.textContent = "";
+        cefasNumber.removeAttribute("aria-describedby");
+        stillwaterSizeError.hidden = true;
+        stillwaterSizeError.textContent = "";
+        stillwaterSize.removeAttribute("aria-describedby");
+        landlockedOnlineError.hidden = true;
+        landlockedOnlineError.textContent = "";
+        locationError.hidden = true;
+        locationError.textContent = "";
+        locationInput.removeAttribute("aria-describedby");
+        nationalGridReferenceError.hidden = true;
+        nationalGridReferenceError.textContent = "";
+        nationalGridReference.removeAttribute("aria-describedby");
+        nonNativeSpeciesError.hidden = true;
+        nonNativeSpeciesError.textContent = "";
+        crayfishError.hidden = true;
+        crayfishError.textContent = "";
+        addAnotherFishError.hidden = true;
+        addAnotherFishError.textContent = "";
+        personalDataError.hidden = true;
+        personalDataError.textContent = "";
+        declarationError.hidden = true;
+        declarationError.textContent = "";
+        document.querySelectorAll(".fish-entry-error").forEach((error) => {
+          error.hidden = true;
+          error.textContent = "";
+        });
+        document.querySelectorAll("#fish-list input, #fish-list select").forEach((control) => {
+          control.removeAttribute("aria-describedby");
+        });
+      }
+
+      function addSummaryError(targetId, message) {
+        const item = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = "#" + targetId;
+        link.textContent = message;
+        item.appendChild(link);
+        errorList.appendChild(item);
+      }
+
+      function setTaskStatus(element, complete, started = complete) {
+        element.textContent = complete ? "Completed" : started ? "In progress" : "Not started";
+      }
+
+      function shouldShowAgentContactDetails() {
+        const selectedActingOnBehalf = document.querySelector('input[name="actingOnBehalf"]:checked');
+        return Boolean(selectedActingOnBehalf && selectedActingOnBehalf.value === "Yes");
+      }
+
+      function updateContactDetailsVariant() {
+        const isAgent = shouldShowAgentContactDetails();
+        contactDetailsHeading.textContent = isAgent
+          ? "Your contact details - as the agent, consultant or contractor"
+          : "Licence holder details";
+        contactDetailsIntro.hidden = !isAgent;
+        contactDetailsSectionHeading.textContent = isAgent ? "Your contact details" : "Contact details";
+        contactDetailsSectionHint.hidden = isAgent;
+        contactCompanyGroup.hidden = !isAgent;
+        if (!isAgent) {
+          contactCompany.value = "";
+          contactCompanyError.hidden = true;
+          contactCompanyError.textContent = "";
+          contactCompany.removeAttribute("aria-describedby");
+        }
+      }
+
+      function updateTaskListStatuses() {
+        const selectedWaterType = document.querySelector('input[name="waterType"]:checked');
+        const selectedNonNativeSpecies = document.querySelector('input[name="nonNativeSpecies"]:checked');
+        const selectedCrayfish = document.querySelector('input[name="crayfish"]:checked');
+        const taskComplete = Boolean(document.querySelector('input[name="task"]:checked'));
+        const waterDetailsComplete = Boolean(waterName.value.trim() && selectedWaterType);
+        const locationDetailsComplete = Boolean(locationInput.value.trim() && nationalGridReference.value.trim());
+        const environmentComplete = Boolean(selectedNonNativeSpecies && selectedCrayfish);
+        const applicationSectionComplete = taskComplete && waterDetailsComplete && locationDetailsComplete;
+        const applicationSectionStarted = Boolean(taskComplete || waterName.value.trim() || selectedWaterType || locationInput.value.trim() || nationalGridReference.value.trim());
+        const fishSectionComplete = environmentComplete && savedFishEntries.length > 0;
+        const fishSectionStarted = Boolean(selectedNonNativeSpecies || selectedCrayfish || savedFishEntries.length > 0);
+        const reviewSectionComplete = personalDataUnderstood.checked && declarationCorrect.checked;
+        const reviewSectionStarted = Boolean(personalDataUnderstood.checked || declarationCorrect.checked);
+        applicationSectionStatus.textContent = "Draft";
+        setTaskStatus(fishSectionStatus, fishSectionComplete, fishSectionStarted);
+        setTaskStatus(reviewSectionStatus, reviewSectionComplete, reviewSectionStarted);
+        setTaskStatus(taskStatus, taskComplete, taskComplete);
+        setTaskStatus(waterDetailsStatus, waterDetailsComplete, Boolean(waterName.value.trim() || selectedWaterType));
+        setTaskStatus(locationDetailsStatus, locationDetailsComplete, Boolean(locationInput.value.trim() || nationalGridReference.value.trim()));
+        setTaskStatus(environmentStatus, environmentComplete, Boolean(selectedNonNativeSpecies || selectedCrayfish));
+        setTaskStatus(fishDetailsStatus, savedFishEntries.length > 0, savedFishEntries.length > 0);
+        setTaskStatus(personalDataStatus, personalDataUnderstood.checked, personalDataUnderstood.checked);
+        setTaskStatus(declarationStatus, declarationCorrect.checked, declarationCorrect.checked);
+      }
+
+      function showTaskError() {
+        errorList.innerHTML = "";
+        addSummaryError("task-stocking", "Select which task you are planning on completing");
+        taskError.textContent = "Select which task you are planning on completing";
+        taskError.hidden = false;
+        errorSummary.hidden = false;
+        holdingMessage.hidden = true;
+        errorSummary.focus();
+      }
+
+      actingOnBehalfForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        clearErrors();
+        const selected = document.querySelector('input[name="actingOnBehalf"]:checked');
+        if (!selected) {
+          errorList.innerHTML = "";
+          addSummaryError("acting-on-behalf-yes", "Select whether you are applying on behalf of someone else");
+          actingOnBehalfError.textContent = "Select whether you are applying on behalf of someone else";
+          actingOnBehalfError.hidden = false;
+          errorSummary.hidden = false;
+          holdingMessage.hidden = true;
+          errorSummary.focus();
+          return;
+        }
+        showScreen("contact-details");
+      });
+
+      contactDetailsForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        clearErrors();
+        const selectedContactLanguage = document.querySelector('input[name="contactLanguage"]:checked');
+        const errors = [];
+
+        if (!contactPhone.value.trim()) {
+          errors.push(["contact-phone", "Enter the phone number"]);
+          contactPhoneError.textContent = "Enter the phone number";
+          contactPhoneError.hidden = false;
+          contactPhone.setAttribute("aria-describedby", "contact-phone-error");
+        }
+        if (shouldShowAgentContactDetails() && !contactCompany.value.trim()) {
+          errors.push(["contact-company", "Enter the company name"]);
+          contactCompanyError.textContent = "Enter the company name";
+          contactCompanyError.hidden = false;
+          contactCompany.setAttribute("aria-describedby", "contact-company-error");
+        }
+        if (!contactAddressLine1.value.trim()) {
+          errors.push(["contact-address-line1", "Enter address line 1"]);
+          contactAddressLine1Error.textContent = "Enter address line 1";
+          contactAddressLine1Error.hidden = false;
+          contactAddressLine1.setAttribute("aria-describedby", "contact-address-line1-error");
+        }
+        if (!contactTownCity.value.trim()) {
+          errors.push(["contact-town-city", "Enter the town or city"]);
+          contactTownCityError.textContent = "Enter the town or city";
+          contactTownCityError.hidden = false;
+          contactTownCity.setAttribute("aria-describedby", "contact-town-city-error");
+        }
+        if (!contactPostcode.value.trim()) {
+          errors.push(["contact-postcode", "Enter the post code"]);
+          contactPostcodeError.textContent = "Enter the post code";
+          contactPostcodeError.hidden = false;
+          contactPostcode.setAttribute("aria-describedby", "contact-postcode-error");
+        }
+        if (!selectedContactLanguage) {
+          errors.push(["contact-language-english", "Select the contact language"]);
+          contactLanguageError.textContent = "Select the contact language";
+          contactLanguageError.hidden = false;
+        }
+        if (errors.length) {
+          errorList.innerHTML = "";
+          errors.forEach(([targetId, message]) => addSummaryError(targetId, message));
+          errorSummary.hidden = false;
+          holdingMessage.hidden = true;
+          errorSummary.focus();
+          return;
+        }
+        showScreen("task");
+      });
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        clearErrors();
+        const selected = document.querySelector('input[name="task"]:checked');
+        if (!selected) {
+          showTaskError();
+          return;
+        }
+        selectedTask = selected.value;
+        showScreen("water-name");
+      });
+
+      waterNameForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        clearErrors();
+        if (!waterName.value.trim()) {
+          errorList.innerHTML = "";
+          addSummaryError("water-name", "Enter the name of the water");
+          waterNameError.textContent = "Enter the name of the water";
+          waterNameError.hidden = false;
+          waterName.setAttribute("aria-describedby", "water-name-error");
+          errorSummary.hidden = false;
+          holdingMessage.hidden = true;
+          errorSummary.focus();
+          return;
+        }
+        showScreen("water-type");
+      });
+
+      waterTypeForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        clearErrors();
+        const selectedWaterType = document.querySelector('input[name="waterType"]:checked');
+        const selectedLandlockedOnline = document.querySelector('input[name="landlockedOnline"]:checked');
+        const errors = [];
+
+        if (!selectedWaterType) {
+          errors.push(["water-type-canal", "Select the type of water"]);
+          waterTypeError.textContent = "Select the type of water";
+          waterTypeError.hidden = false;
+        }
+        if (selectedWaterType && selectedWaterType.value === "Stillwater" && !cefasNumber.value.trim()) {
+          errors.push(["cefas-number", "Enter your CEFAS registration number"]);
+          cefasNumberError.textContent = "Enter your CEFAS registration number";
+          cefasNumberError.hidden = false;
+          cefasNumber.setAttribute("aria-describedby", "cefas-number-error");
+        }
+        if (selectedWaterType && selectedWaterType.value === "Stillwater" && selectedTask === "Stocking fish" && !stillwaterSize.value.trim()) {
+          errors.push(["stillwater-size", "Enter the size of the water"]);
+          stillwaterSizeError.textContent = "Enter the size of the water";
+          stillwaterSizeError.hidden = false;
+          stillwaterSize.setAttribute("aria-describedby", "stillwater-size-error");
+        }
+        if (selectedWaterType && selectedWaterType.value === "Stillwater" && selectedTask === "Supplying fish" && !selectedLandlockedOnline) {
+          errors.push(["landlocked-online-yes", "Select whether the water is landlocked or on line"]);
+          landlockedOnlineError.textContent = "Select whether the water is landlocked or on line";
+          landlockedOnlineError.hidden = false;
+        }
+        if (errors.length) {
+          errorList.innerHTML = "";
+          errors.forEach(([targetId, message]) => addSummaryError(targetId, message));
+          errorSummary.hidden = false;
+          holdingMessage.hidden = true;
+          errorSummary.focus();
+          return;
+        }
+        showScreen("location");
+      });
+
+      locationForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        clearErrors();
+        if (!locationInput.value.trim()) {
+          errorList.innerHTML = "";
+          addSummaryError("location", "Enter the nearest town or city of your proposed activity");
+          locationError.textContent = "Enter the nearest town or city of your proposed activity";
+          locationError.hidden = false;
+          locationInput.setAttribute("aria-describedby", "location-error");
+          errorSummary.hidden = false;
+          holdingMessage.hidden = true;
+          errorSummary.focus();
+          return;
+        }
+        showScreen("grid-reference");
+      });
+
+      gridReferenceForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        clearErrors();
+        if (!nationalGridReference.value.trim()) {
+          errorList.innerHTML = "";
+          addSummaryError("national-grid-reference", "Enter a National Grid Reference");
+          nationalGridReferenceError.textContent = "Enter a National Grid Reference";
+          nationalGridReferenceError.hidden = false;
+          nationalGridReference.setAttribute("aria-describedby", "national-grid-reference-error");
+          errorSummary.hidden = false;
+          holdingMessage.hidden = true;
+          errorSummary.focus();
+          return;
+        }
+        showScreen("non-native-species");
+      });
+
+      nonNativeSpeciesForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        clearErrors();
+        const selectedNonNativeSpecies = document.querySelector('input[name="nonNativeSpecies"]:checked');
+        if (!selectedNonNativeSpecies) {
+          errorList.innerHTML = "";
+          addSummaryError("non-native-species-yes", "Select whether any of the fish are a non-native species");
+          nonNativeSpeciesError.textContent = "Select whether any of the fish are a non-native species";
+          nonNativeSpeciesError.hidden = false;
+          errorSummary.hidden = false;
+          holdingMessage.hidden = true;
+          errorSummary.focus();
+          return;
+        }
+        showScreen("crayfish");
+      });
+
+      crayfishForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        clearErrors();
+        const selectedCrayfish = document.querySelector('input[name="crayfish"]:checked');
+        if (!selectedCrayfish) {
+          errorList.innerHTML = "";
+          addSummaryError("crayfish-yes", "Select whether there are any crayfish present");
+          crayfishError.textContent = "Select whether there are any crayfish present";
+          crayfishError.hidden = false;
+          errorSummary.hidden = false;
+          holdingMessage.hidden = true;
+          errorSummary.focus();
+          return;
+        }
+        showScreen("fish");
+      });
+
+      fishForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        clearErrors();
+
+        if (fishSummaryPanel.hidden) {
+          const errors = validateFishEntries();
+          errorList.innerHTML = "";
+          if (errors.length) {
+            errors.forEach(([targetId, message]) => addSummaryError(targetId, message));
+            errorSummary.hidden = false;
+            holdingMessage.hidden = true;
+            errorSummary.focus();
+            return;
+          }
+          saveCurrentFishEntry();
+          renderFishSummary();
+          resetFishForm();
+          showFishSummaryPanel();
+          return;
+        }
+
+        const selectedAddAnother = document.querySelector('input[name="addAnotherFish"]:checked');
+        if (!selectedAddAnother) {
+          errorList.innerHTML = "";
+          addSummaryError("add-another-fish-yes", "Select whether you need to add another type of fish");
+          addAnotherFishError.textContent = "Select whether you need to add another type of fish";
+          addAnotherFishError.hidden = false;
+          errorSummary.hidden = false;
+          holdingMessage.hidden = true;
+          errorSummary.focus();
+          return;
+        }
+        if (selectedAddAnother.value === "Yes") {
+          clearAddAnotherFishAnswer();
+          resetFishForm();
+          showFishEntryPanel();
+          fishList.querySelector("input").focus();
+          return;
+        }
+        showScreen("personal-data");
+      });
+
+      personalDataForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        clearErrors();
+        if (!personalDataUnderstood.checked) {
+          errorList.innerHTML = "";
+          addSummaryError("personal-data-understood", "Confirm you have read and understood this information");
+          personalDataError.textContent = "Confirm you have read and understood this information";
+          personalDataError.hidden = false;
+          errorSummary.hidden = false;
+          holdingMessage.hidden = true;
+          errorSummary.focus();
+          return;
+        }
+        showScreen("declaration");
+      });
+
+      declarationForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        clearErrors();
+        if (!declarationCorrect.checked) {
+          errorList.innerHTML = "";
+          addSummaryError("declaration-correct", "Confirm that the information you have given is correct");
+          declarationError.textContent = "Confirm that the information you have given is correct";
+          declarationError.hidden = false;
+          errorSummary.hidden = false;
+          holdingMessage.hidden = true;
+          errorSummary.focus();
+          return;
+        }
+        holdingMessageText.textContent = "Your application answers have been saved.";
+        holdingMessage.hidden = false;
+        holdingMessage.scrollIntoView({ block: "start" });
+      });
+
+      function addFishEntry() {
+        fishEntryCount += 1;
+        const entryNumber = fishEntryCount;
+        const card = document.createElement("fieldset");
+        card.className = "prototype-repeat-card";
+        card.dataset.fishEntry = String(entryNumber);
+        card.innerHTML = `
+          <legend class="prototype-repeat-card__header">
+            <span class="prototype-repeat-card__title">Fish ${entryNumber}</span>
+            <button class="prototype-link-button remove-fish-button" type="button"${entryNumber === 1 ? " hidden" : ""}>Remove</button>
+          </legend>
+
+          <div class="prototype-fish-question">
+            <div class="prototype-fish-question__text">
+              <h3>Fish species</h3>
+            </div>
+            <div class="prototype-form-group">
+              <label class="nrw-visually-hidden" for="fish-species-${entryNumber}">Fish species</label>
+              <span class="nrw-field-error fish-entry-error" id="fish-species-${entryNumber}-error" hidden></span>
+              <input class="nrw-text-input" id="fish-species-${entryNumber}" name="fish[${entryNumber}][species]" type="text" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="prototype-fish-question">
+            <div class="prototype-fish-question__text">
+              <h3>Number of fish</h3>
+              <p class="prototype-fish-question__body">If you’re unsure, give an estimation</p>
+            </div>
+            <div class="prototype-form-group">
+              <label class="nrw-visually-hidden" for="fish-number-${entryNumber}">Number of fish</label>
+              <span class="nrw-field-error fish-entry-error" id="fish-number-${entryNumber}-error" hidden></span>
+              <select class="prototype-select" id="fish-number-${entryNumber}" name="fish[${entryNumber}][number]">
+                <option value="">Select number</option>
+                <option value="1-10">1-10</option>
+                <option value="10-20">10-20</option>
+                <option value="20-50">20-50</option>
+                <option value="50-100">50-100</option>
+                <option value="100+">100+</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="prototype-fish-question">
+            <div class="prototype-fish-question__text">
+              <h3>Length or weight</h3>
+              <p class="prototype-fish-question__body">Please provide an estimation of the average length or weight of each fish</p>
+            </div>
+
+            <input type="radio" id="fish-measurement-size-${entryNumber}" name="fish[${entryNumber}][measurementType]" value="size" data-entry="${entryNumber}" checked hidden>
+            <input type="radio" id="fish-measurement-weight-${entryNumber}" name="fish[${entryNumber}][measurementType]" value="weight" data-entry="${entryNumber}" hidden>
+
+            <div class="prototype-form-group prototype-measurement-input" id="fish-size-group-${entryNumber}">
+              <label class="nrw-unit-input__label" for="fish-size-${entryNumber}">Length in cm</label>
+              <span class="nrw-field-error fish-entry-error" id="fish-size-${entryNumber}-error" hidden></span>
+              <input class="nrw-text-input" id="fish-size-${entryNumber}" name="fish[${entryNumber}][size]" type="text" inputmode="decimal" autocomplete="off">
+            </div>
+
+            <div class="prototype-form-group prototype-measurement-input" id="fish-weight-group-${entryNumber}" hidden>
+              <label class="nrw-unit-input__label" for="fish-weight-${entryNumber}">Weight in kg</label>
+              <span class="nrw-field-error fish-entry-error" id="fish-weight-${entryNumber}-error" hidden></span>
+              <input class="nrw-text-input" id="fish-weight-${entryNumber}" name="fish[${entryNumber}][weight]" type="text" inputmode="decimal" autocomplete="off">
+            </div>
+
+            <button class="prototype-link-button fish-measurement-switch" type="button" data-entry="${entryNumber}">Switch to weight</button>
+          </div>
+        `;
+        fishList.appendChild(card);
+        updateFishCardTitles();
+      }
+
+      function updateFishCardTitles() {
+        const cards = fishList.querySelectorAll(".prototype-repeat-card");
+        cards.forEach((card, index) => {
+          card.querySelector(".prototype-repeat-card__title").textContent = "Fish " + (index + 1);
+          card.querySelector(".remove-fish-button").hidden = cards.length === 1;
+        });
+      }
+
+      function updateFishMeasurementInputs(entryNumber) {
+        const selectedType = document.querySelector('input[name="fish[' + entryNumber + '][measurementType]"]:checked');
+        const sizeGroup = document.getElementById("fish-size-group-" + entryNumber);
+        const weightGroup = document.getElementById("fish-weight-group-" + entryNumber);
+        const measurementTypeError = document.getElementById("fish-measurement-type-" + entryNumber + "-error");
+        sizeGroup.hidden = !selectedType || selectedType.value !== "size";
+        weightGroup.hidden = !selectedType || selectedType.value !== "weight";
+        if (measurementTypeError) {
+          measurementTypeError.hidden = true;
+          measurementTypeError.textContent = "";
+        }
+        const switchButton = document.querySelector('.fish-measurement-switch[data-entry="' + entryNumber + '"]');
+        if (switchButton) {
+          switchButton.textContent = selectedType && selectedType.value === "weight" ? "Switch to size" : "Switch to weight";
+        }
+        if (sizeGroup.hidden) {
+          const sizeInput = document.getElementById("fish-size-" + entryNumber);
+          const sizeError = document.getElementById("fish-size-" + entryNumber + "-error");
+          sizeInput.value = "";
+          sizeInput.removeAttribute("aria-describedby");
+          sizeError.hidden = true;
+          sizeError.textContent = "";
+        }
+        if (weightGroup.hidden) {
+          const weightInput = document.getElementById("fish-weight-" + entryNumber);
+          const weightError = document.getElementById("fish-weight-" + entryNumber + "-error");
+          weightInput.value = "";
+          weightInput.removeAttribute("aria-describedby");
+          weightError.hidden = true;
+          weightError.textContent = "";
+        }
+      }
+
+      function setFieldError(targetId, errorId, message) {
+        const error = document.getElementById(errorId);
+        const target = document.getElementById(targetId);
+        error.textContent = message;
+        error.hidden = false;
+        target.setAttribute("aria-describedby", errorId);
+      }
+
+      function validateFishEntries() {
+        const errors = [];
+        fishList.querySelectorAll(".prototype-repeat-card").forEach((card, index) => {
+          const entryNumber = card.dataset.fishEntry;
+          const labelNumber = index + 1;
+          const species = document.getElementById("fish-species-" + entryNumber);
+          const number = document.getElementById("fish-number-" + entryNumber);
+          const selectedType = document.querySelector('input[name="fish[' + entryNumber + '][measurementType]"]:checked');
+          if (!species.value.trim()) {
+            const message = "Enter the species for fish " + labelNumber;
+            errors.push(["fish-species-" + entryNumber, message]);
+            setFieldError("fish-species-" + entryNumber, "fish-species-" + entryNumber + "-error", message);
+          }
+          if (!number.value) {
+            const message = "Select the number of fish for fish " + labelNumber;
+            errors.push(["fish-number-" + entryNumber, message]);
+            setFieldError("fish-number-" + entryNumber, "fish-number-" + entryNumber + "-error", message);
+          }
+          if (selectedType.value === "size" && !document.getElementById("fish-size-" + entryNumber).value.trim()) {
+            const message = "Enter the length in cm for fish " + labelNumber;
+            errors.push(["fish-size-" + entryNumber, message]);
+            setFieldError("fish-size-" + entryNumber, "fish-size-" + entryNumber + "-error", message);
+          } else if (selectedType.value === "weight" && !document.getElementById("fish-weight-" + entryNumber).value.trim()) {
+            const message = "Enter the weight in kg for fish " + labelNumber;
+            errors.push(["fish-weight-" + entryNumber, message]);
+            setFieldError("fish-weight-" + entryNumber, "fish-weight-" + entryNumber + "-error", message);
+          }
+        });
+        return errors;
+      }
+
+      function getCurrentFishEntry() {
+        const card = fishList.querySelector(".prototype-repeat-card");
+        const entryNumber = card.dataset.fishEntry;
+        const selectedType = document.querySelector('input[name="fish[' + entryNumber + '][measurementType]"]:checked');
+        const isWeight = selectedType && selectedType.value === "weight";
+        const measurementValue = isWeight
+          ? document.getElementById("fish-weight-" + entryNumber).value.trim()
+          : document.getElementById("fish-size-" + entryNumber).value.trim();
+        return {
+          species: document.getElementById("fish-species-" + entryNumber).value.trim(),
+          number: document.getElementById("fish-number-" + entryNumber).value,
+          measurementLabel: isWeight ? "Weight" : "Length",
+          measurementValue,
+          measurementUnit: isWeight ? "kg" : "cm",
+        };
+      }
+
+      function saveCurrentFishEntry() {
+        savedFishEntries.push(getCurrentFishEntry());
+      }
+
+      function renderFishSummary() {
+        fishSummaryList.innerHTML = "";
+        const fishCount = savedFishEntries.length;
+        fishSummaryHeading.textContent = "You have added " + fishCount + (fishCount === 1 ? " type of fish" : " types of fish");
+        fishSummaryList.hidden = fishCount === 0;
+        if (!savedFishEntries.length) {
+          return;
+        }
+        const summary = document.createElement("div");
+        summary.className = "prototype-fish-summary";
+        const list = document.createElement("dl");
+        list.className = "nrw-summary-list";
+        savedFishEntries.forEach((fish, index) => {
+          const row = document.createElement("div");
+          row.className = "nrw-summary-list__row";
+          row.innerHTML = `
+            <dt class="nrw-summary-list__key">${escapeHtml(fish.species)}</dt>
+            <dd class="nrw-summary-list__value">${escapeHtml(formatFishSummary(fish))}</dd>
+            <dd class="nrw-summary-list__actions">
+              <a href="#" data-fish-index="${index}">Change</a>
+            </dd>
+            <dd class="nrw-summary-list__actions">
+              <a href="#" data-remove-fish-index="${index}">Remove</a>
+            </dd>
+          `;
+          list.appendChild(row);
+        });
+        summary.appendChild(list);
+        fishSummaryList.appendChild(summary);
+      }
+
+      function formatFishSummary(fish) {
+        return fish.number + ", " + fish.measurementValue + fish.measurementUnit;
+      }
+
+      function populateFishForm(fish) {
+        resetFishForm();
+        const card = fishList.querySelector(".prototype-repeat-card");
+        const entryNumber = card.dataset.fishEntry;
+        document.getElementById("fish-species-" + entryNumber).value = fish.species;
+        document.getElementById("fish-number-" + entryNumber).value = fish.number;
+        if (fish.measurementUnit === "kg") {
+          document.getElementById("fish-measurement-weight-" + entryNumber).checked = true;
+        } else {
+          document.getElementById("fish-measurement-size-" + entryNumber).checked = true;
+        }
+        updateFishMeasurementInputs(entryNumber);
+        if (fish.measurementUnit === "kg") {
+          document.getElementById("fish-weight-" + entryNumber).value = fish.measurementValue;
+        } else {
+          document.getElementById("fish-size-" + entryNumber).value = fish.measurementValue;
+        }
+      }
+
+      function resetFishForm() {
+        fishList.innerHTML = "";
+        addFishEntry();
+      }
+
+      function showFishEntryPanel() {
+        fishEntryPanel.hidden = false;
+        fishSummaryPanel.hidden = true;
+      }
+
+      function showFishSummaryPanel() {
+        fishEntryPanel.hidden = true;
+        fishSummaryPanel.hidden = false;
+      }
+
+      function clearAddAnotherFishAnswer() {
+        document.querySelectorAll('input[name="addAnotherFish"]').forEach((input) => {
+          input.checked = false;
+        });
+      }
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, (character) => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;",
+        }[character]));
+      }
+
+      function updateWaterTypeConditionalQuestions() {
+        const selectedWaterType = document.querySelector('input[name="waterType"]:checked');
+        const isStillwater = selectedWaterType && selectedWaterType.value === "Stillwater";
+        stillwaterQuestions.hidden = !isStillwater;
+        stillwaterSizeGroup.hidden = !(isStillwater && selectedTask === "Stocking fish");
+        landlockedOnlineGroup.hidden = !(isStillwater && selectedTask === "Supplying fish");
+        if (!isStillwater) {
+          cefasNumber.value = "";
+        }
+        if (stillwaterSizeGroup.hidden) {
+          stillwaterSize.value = "";
+          setStillwaterSizeUnit("acres");
+        }
+        if (landlockedOnlineGroup.hidden) {
+          document.querySelectorAll('input[name="landlockedOnline"]').forEach((input) => {
+            input.checked = false;
+          });
+        }
+      }
+
+      function setStillwaterSizeUnit(unit) {
+        stillwaterSizeUnit = unit;
+        if (unit === "acres") {
+          stillwaterSizeLabel.textContent = "Acres";
+          stillwaterSizeSwitch.textContent = "Switch to hectares";
+          stillwaterSizeUnitInput.value = "acres";
+        } else {
+          stillwaterSizeLabel.textContent = "Hectares";
+          stillwaterSizeSwitch.textContent = "Switch to acres";
+          stillwaterSizeUnitInput.value = "hectares";
+        }
+      }
+
+      actingOnBehalfBackButton.addEventListener("click", () => showScreen(currentTaskListScreen));
+      contactDetailsBackButton.addEventListener("click", () => showScreen("acting-on-behalf"));
+      backButton.addEventListener("click", () => showScreen("contact-details"));
+      document.querySelectorAll("[data-task-screen]").forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          showScreen(link.dataset.taskScreen);
+        });
+      });
+      document.querySelectorAll(".prototype-task-list-link a").forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          showScreen("completed-task-list");
+        });
+      });
+      waterNameBackButton.addEventListener("click", () => showScreen("task"));
+      waterTypeBackButton.addEventListener("click", () => showScreen("water-name"));
+      locationBackButton.addEventListener("click", () => showScreen("water-type"));
+      gridReferenceBackButton.addEventListener("click", () => showScreen("location"));
+      nonNativeSpeciesBackButton.addEventListener("click", () => showScreen("grid-reference"));
+      crayfishBackButton.addEventListener("click", () => showScreen("non-native-species"));
+      fishBackButton.addEventListener("click", () => showScreen("crayfish"));
+      personalDataBackButton.addEventListener("click", () => {
+        renderFishSummary();
+        showFishSummaryPanel();
+        showScreen("fish");
+      });
+      declarationBackButton.addEventListener("click", () => showScreen("personal-data"));
+      newPermitButton.addEventListener("click", () => showScreen("acting-on-behalf"));
+      completedTaskListBackButton.addEventListener("click", () => showScreen("task-list"));
+
+      fishList.addEventListener("click", (event) => {
+        if (event.target.classList.contains("fish-measurement-switch")) {
+          const entryNumber = event.target.dataset.entry;
+          const sizeInput = document.getElementById("fish-measurement-size-" + entryNumber);
+          const weightInput = document.getElementById("fish-measurement-weight-" + entryNumber);
+          if (sizeInput.checked) {
+            weightInput.checked = true;
+          } else {
+            sizeInput.checked = true;
+          }
+          updateFishMeasurementInputs(entryNumber);
+          return;
+        }
+
+        if (!event.target.classList.contains("remove-fish-button")) {
+          return;
+        }
+        event.target.closest(".prototype-repeat-card").remove();
+        updateFishCardTitles();
+      });
+
+      fishList.addEventListener("change", (event) => {
+        if (event.target.dataset.entry) {
+          updateFishMeasurementInputs(event.target.dataset.entry);
+        }
+      });
+
+      fishSummaryList.addEventListener("click", (event) => {
+        if (event.target.matches("[data-fish-index]")) {
+          event.preventDefault();
+          clearErrors();
+          const fishIndex = Number(event.target.dataset.fishIndex);
+          const [fish] = savedFishEntries.splice(fishIndex, 1);
+          renderFishSummary();
+          populateFishForm(fish);
+          clearAddAnotherFishAnswer();
+          showFishEntryPanel();
+          fishList.querySelector("input").focus();
+          return;
+        }
+
+        if (event.target.matches("[data-remove-fish-index]")) {
+          event.preventDefault();
+          clearErrors();
+          const fishIndex = Number(event.target.dataset.removeFishIndex);
+          savedFishEntries.splice(fishIndex, 1);
+          renderFishSummary();
+          clearAddAnotherFishAnswer();
+          if (!savedFishEntries.length) {
+            resetFishForm();
+            showFishEntryPanel();
+            fishList.querySelector("input").focus();
+          }
+        }
+      });
+
+      document.querySelectorAll('input[name="waterType"]').forEach((input) => {
+        input.addEventListener("change", updateWaterTypeConditionalQuestions);
+      });
+      stillwaterSizeSwitch.addEventListener("click", () => {
+        setStillwaterSizeUnit(stillwaterSizeUnit === "acres" ? "hectares" : "acres");
+      });
+      addFishEntry();
+    </script>
+  </body>
+</html>

@@ -764,26 +764,78 @@
 
       .prototype-water-summary {
         width: min(640px, 100%);
+        display: flex;
+        flex-direction: column;
+        gap: 0;
       }
 
-      .prototype-water-summary .nrw-summary-list {
+      .prototype-water-summary-table {
         width: min(640px, 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
       }
 
-      .prototype-water-summary .nrw-summary-list__row {
-        min-height: 57px;
-        grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
+      .prototype-water-summary-table__row {
+        width: min(640px, 100%);
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         align-items: center;
+        min-height: 56px;
       }
 
-      .prototype-water-summary .nrw-summary-list__key {
-        padding-left: 24px;
+      .prototype-water-summary-table__row + .prototype-water-summary-table__row {
+        border-top: 2px solid #a1a1a1;
+      }
+
+      .prototype-water-summary-table__lead,
+      .prototype-water-summary-table__data,
+      .prototype-water-summary-table__actions {
+        min-width: 0;
+        margin: 0;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        color: #333333;
+        font-size: 16px;
+        line-height: 24px;
+      }
+
+      .prototype-water-summary-table__lead {
+        padding-left: 0;
         padding-right: 8px;
+        font-family: "Montserrat", "Gotham Rounded", Arial, sans-serif;
+        font-weight: 700;
       }
 
-      .prototype-water-summary .nrw-summary-list__value {
+      .prototype-water-summary-table__data {
         padding-left: 8px;
-        padding-right: 24px;
+        padding-right: 8px;
+        font-family: "Gotham Rounded Book", "Gotham Rounded", Arial, sans-serif;
+        font-weight: 400;
+      }
+
+      .prototype-water-summary-table__actions {
+        padding-left: 8px;
+        padding-right: 0;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 8px;
+        font-family: "Montserrat", "Gotham Rounded", Arial, sans-serif;
+        font-weight: 700;
+      }
+
+      .prototype-water-summary-table__actions a {
+        color: #007485;
+        text-decoration: none;
+      }
+
+      .prototype-water-summary-table__divider {
+        width: 24px;
+        height: 0;
+        border-top: 1px solid #a1a1a1;
+        transform: rotate(90deg);
       }
 
       .prototype-repeat-card {
@@ -1222,28 +1274,28 @@
                 <dl class="nrw-summary-list">
                   <div class="nrw-summary-list__row">
                     <dt class="nrw-summary-list__key">Permit type</dt>
-                    <dd class="nrw-summary-list__value">Keep &amp; introduce fish (a site permit)</dd>
+                    <dd class="nrw-summary-list__value" id="completed-permit-type-value">Keep &amp; introduce fish (a site permit)</dd>
                     <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="task">Change</a></dd>
                   </div>
                   <div class="nrw-summary-list__row">
-                    <dt class="nrw-summary-list__key">Name of water</dt>
-                    <dd class="nrw-summary-list__value">Name</dd>
+                    <dt class="nrw-summary-list__key">Site</dt>
+                    <dd class="nrw-summary-list__value" id="completed-site-value">Name</dd>
+                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="stocking-site">Change</a></dd>
+                  </div>
+                  <div class="nrw-summary-list__row">
+                    <dt class="nrw-summary-list__key">Conservation</dt>
+                    <dd class="nrw-summary-list__value" id="completed-conservation-value">Unknown</dd>
+                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="conservation-designation">Change</a></dd>
+                  </div>
+                  <div class="nrw-summary-list__row" id="completed-affected-water-row">
+                    <dt class="nrw-summary-list__key">Affected water bodies</dt>
+                    <dd class="nrw-summary-list__value" id="completed-affected-water-value">0</dd>
                     <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="water-name">Change</a></dd>
                   </div>
-                  <div class="nrw-summary-list__row">
-                    <dt class="nrw-summary-list__key">Type of water</dt>
-                    <dd class="nrw-summary-list__value">Stillwater</dd>
-                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="water-type">Change</a></dd>
-                  </div>
-                  <div class="nrw-summary-list__row">
-                    <dt class="nrw-summary-list__key">Registration number</dt>
-                    <dd class="nrw-summary-list__value">123456</dd>
-                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="water-type">Change</a></dd>
-                  </div>
-                  <div class="nrw-summary-list__row">
-                    <dt class="nrw-summary-list__key">Size</dt>
-                    <dd class="nrw-summary-list__value">12 acres</dd>
-                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="water-type">Change</a></dd>
+                  <div class="nrw-summary-list__row" id="completed-cefas-row">
+                    <dt class="nrw-summary-list__key">CEFAS</dt>
+                    <dd class="nrw-summary-list__value" id="completed-cefas-value">123456</dd>
+                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="cefas">Change</a></dd>
                   </div>
                 </dl>
               </section>
@@ -1254,18 +1306,13 @@
                 </div>
                 <dl class="nrw-summary-list">
                   <div class="nrw-summary-list__row">
-                    <dt class="nrw-summary-list__key">Non-native species</dt>
-                    <dd class="nrw-summary-list__value">No</dd>
-                    <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="non-native-species">Change</a></dd>
-                  </div>
-                  <div class="nrw-summary-list__row">
                     <dt class="nrw-summary-list__key">Crayfish present</dt>
-                    <dd class="nrw-summary-list__value">None</dd>
+                    <dd class="nrw-summary-list__value" id="completed-crayfish-value">None</dd>
                     <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="crayfish">Change</a></dd>
                   </div>
                   <div class="nrw-summary-list__row">
                     <dt class="nrw-summary-list__key">Fish</dt>
-                    <dd class="nrw-summary-list__value">Trout, Carp</dd>
+                    <dd class="nrw-summary-list__value" id="completed-fish-value">0 species</dd>
                     <dd class="nrw-summary-list__actions"><a href="#" data-task-screen="fish">Change</a></dd>
                   </div>
                 </dl>
@@ -1990,6 +2037,46 @@
         </p>
       </form>
 
+      <form class="nrw-screen nrw-template-form" id="cefas-form" novalidate hidden>
+        <div class="nrw-template-column">
+          <div class="nrw-template-content">
+            <div class="nrw-application-question">
+              <div class="nrw-question-block__text">
+                <h2>Provide your CEFAS registration number</h2>
+                <div class="nrw-application-question__body">
+                  <p>You can only apply to move live fish to and from a fishery if you are registered with the FHI.</p>
+                  <p><a href="https://www.gov.uk/guidance/registering-with-the-fish-health-inspectorate" rel="noreferrer" target="_blank">Complete the application to Register a fishery, cropping water or aquaponic system</a> (opens in new tab)</p>
+                  <p>You can return to this permit application when you have got your registration number.</p>
+                  <p>This should be in the format AB123-C-567</p>
+                </div>
+              </div>
+
+              <div class="prototype-form-group" id="cefas-registration-group">
+                <label class="nrw-visually-hidden" for="cefas-registration">Provide your CEFAS registration number</label>
+                <span class="nrw-field-error" id="cefas-registration-error" hidden></span>
+                <input class="nrw-text-input" id="cefas-registration" name="cefasRegistration" type="text" autocomplete="off">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="prototype-screen-actions">
+          <div class="nrw-button-row nrw-button-row--template">
+            <button type="button" class="nrw-button nrw-button--secondary nrw-button--back" id="cefas-back-button">Back</button>
+            <button type="submit" class="nrw-button nrw-button--primary nrw-button--continue">
+              <span>Save and continue</span>
+            </button>
+          </div>
+
+          <p class="prototype-task-list-link"><a href="#">Go back to task list</a></p>
+        </div>
+
+        <p class="prototype-inline-feedback">
+          <span>Is there anything wrong with this page?</span>
+          <a href="#">Give us your feedback</a>
+        </p>
+      </form>
+
       <form class="nrw-screen nrw-template-form" id="grid-reference-form" novalidate hidden>
         <div class="nrw-template-column">
           <div class="nrw-template-content">
@@ -2109,8 +2196,12 @@
             <div class="nrw-application-question">
               <fieldset>
                 <legend>
-                  <h2>Are there any crayfish present?</h2>
+                  <h2>Are native crayfish present in the fishery?</h2>
                 </legend>
+
+                <div class="nrw-application-question__body">
+                  <p>If there any native crayfish present in your fishery, they could be affected by the introduction of new fish</p>
+                </div>
 
                 <span class="nrw-field-error" id="crayfish-error" hidden></span>
 
@@ -2369,6 +2460,7 @@
       const conservationDesignationForm = document.getElementById("conservation-designation-form");
       const waterNameForm = document.getElementById("water-name-form");
       const locationForm = document.getElementById("location-form");
+      const cefasForm = document.getElementById("cefas-form");
       const gridReferenceForm = document.getElementById("grid-reference-form");
       const nonNativeSpeciesForm = document.getElementById("non-native-species-form");
       const crayfishForm = document.getElementById("crayfish-form");
@@ -2436,6 +2528,8 @@
       const downstreamLimit = document.getElementById("downstream-limit");
       const locationInput = document.getElementById("location");
       const locationError = document.getElementById("location-error");
+      const cefasRegistration = document.getElementById("cefas-registration");
+      const cefasRegistrationError = document.getElementById("cefas-registration-error");
       const nationalGridReference = document.getElementById("national-grid-reference");
       const nationalGridReferenceError = document.getElementById("national-grid-reference-error");
       const nonNativeSpeciesError = document.getElementById("non-native-species-error");
@@ -2450,6 +2544,14 @@
       const personalDataError = document.getElementById("personal-data-error");
       const declarationCorrect = document.getElementById("declaration-correct");
       const declarationError = document.getElementById("declaration-error");
+      const completedPermitTypeValue = document.getElementById("completed-permit-type-value");
+      const completedSiteValue = document.getElementById("completed-site-value");
+      const completedConservationValue = document.getElementById("completed-conservation-value");
+      const completedAffectedWaterValue = document.getElementById("completed-affected-water-value");
+      const completedCefasRow = document.getElementById("completed-cefas-row");
+      const completedCefasValue = document.getElementById("completed-cefas-value");
+      const completedCrayfishValue = document.getElementById("completed-crayfish-value");
+      const completedFishValue = document.getElementById("completed-fish-value");
       const applicationSectionStatus = document.getElementById("application-section-status");
       const fishSectionStatus = document.getElementById("fish-section-status");
       const reviewSectionStatus = document.getElementById("review-section-status");
@@ -2471,6 +2573,7 @@
       const conservationDesignationBackButton = document.getElementById("conservation-designation-back-button");
       const waterNameBackButton = document.getElementById("water-name-back-button");
       const locationBackButton = document.getElementById("location-back-button");
+      const cefasBackButton = document.getElementById("cefas-back-button");
       const gridReferenceBackButton = document.getElementById("grid-reference-back-button");
       const nonNativeSpeciesBackButton = document.getElementById("non-native-species-back-button");
       const crayfishBackButton = document.getElementById("crayfish-back-button");
@@ -2495,6 +2598,7 @@
         conservationDesignationForm.hidden = screen !== "conservation-designation";
         waterNameForm.hidden = screen !== "water-name";
         locationForm.hidden = screen !== "location";
+        cefasForm.hidden = screen !== "cefas";
         gridReferenceForm.hidden = screen !== "grid-reference";
         nonNativeSpeciesForm.hidden = screen !== "non-native-species";
         crayfishForm.hidden = screen !== "crayfish";
@@ -2521,6 +2625,7 @@
         }
         if (screen === "completed-task-list") {
           currentTaskListScreen = "completed-task-list";
+          updateCompletedTaskListSummary();
         }
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
@@ -2583,6 +2688,9 @@
         locationError.hidden = true;
         locationError.textContent = "";
         locationInput.removeAttribute("aria-describedby");
+        cefasRegistrationError.hidden = true;
+        cefasRegistrationError.textContent = "";
+        cefasRegistration.removeAttribute("aria-describedby");
         nationalGridReferenceError.hidden = true;
         nationalGridReferenceError.textContent = "";
         nationalGridReference.removeAttribute("aria-describedby");
@@ -2621,6 +2729,10 @@
       function shouldShowAgentContactDetails() {
         const selectedActingOnBehalf = document.querySelector('input[name="actingOnBehalf"]:checked');
         return Boolean(selectedActingOnBehalf && selectedActingOnBehalf.value === "Yes");
+      }
+
+      function hasStillwaterEntry() {
+        return savedWaterEntries.some((water) => water.type === "Stillwater");
       }
 
       function updateContactDetailsVariant() {
@@ -2677,6 +2789,41 @@
         setTaskStatus(fishDetailsStatus, savedFishEntries.length > 0, savedFishEntries.length > 0);
         setTaskStatus(personalDataStatus, personalDataUnderstood.checked, personalDataUnderstood.checked);
         setTaskStatus(declarationStatus, declarationCorrect.checked, declarationCorrect.checked);
+      }
+
+      function formatConservationSummary() {
+        const selectedConservationDesignation = document.querySelector('input[name="conservationDesignation"]:checked');
+        if (!selectedConservationDesignation) {
+          return "Unknown";
+        }
+        if (selectedConservationDesignation.value !== "Yes") {
+          return selectedConservationDesignation.value;
+        }
+        const selectedTypes = Array.from(document.querySelectorAll('input[name="designationTypes"]:checked'))
+          .map((checkbox) => checkbox.value);
+        return selectedTypes.length ? "Yes - " + selectedTypes.join(", ") : "Yes";
+      }
+
+      function formatCrayfishSummary() {
+        const selectedCrayfish = document.querySelector('input[name="crayfish"]:checked');
+        if (!selectedCrayfish) {
+          return "None";
+        }
+        if (selectedCrayfish.value === "No") {
+          return "None";
+        }
+        return selectedCrayfish.value;
+      }
+
+      function updateCompletedTaskListSummary() {
+        completedPermitTypeValue.textContent = selectedTask || "Keep & introduce fish (a site permit)";
+        completedSiteValue.textContent = stockingSiteName.value.trim() || "Site name";
+        completedConservationValue.textContent = formatConservationSummary();
+        completedAffectedWaterValue.textContent = String(savedWaterEntries.length);
+        completedCefasRow.hidden = !hasStillwaterEntry();
+        completedCefasValue.textContent = cefasRegistration.value.trim() || "Number";
+        completedCrayfishValue.textContent = formatCrayfishSummary();
+        completedFishValue.textContent = savedFishEntries.length + (savedFishEntries.length === 1 ? " species" : " species");
       }
 
       function showTaskError() {
@@ -2854,7 +3001,7 @@
             waterName.focus();
             return;
           }
-          showScreen("fish");
+          showScreen(hasStillwaterEntry() ? "cefas" : "fish");
           return;
         }
         errorList.innerHTML = "";
@@ -2930,6 +3077,23 @@
         showScreen("grid-reference");
       });
 
+      cefasForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        clearErrors();
+        if (!cefasRegistration.value.trim()) {
+          errorList.innerHTML = "";
+          addSummaryError("cefas-registration", "Enter your CEFAS registration number");
+          cefasRegistrationError.textContent = "Enter your CEFAS registration number";
+          cefasRegistrationError.hidden = false;
+          cefasRegistration.setAttribute("aria-describedby", "cefas-registration-error");
+          errorSummary.hidden = false;
+          holdingMessage.hidden = true;
+          errorSummary.focus();
+          return;
+        }
+        showScreen("crayfish");
+      });
+
       gridReferenceForm.addEventListener("submit", (event) => {
         event.preventDefault();
         clearErrors();
@@ -2970,8 +3134,8 @@
         const selectedCrayfish = document.querySelector('input[name="crayfish"]:checked');
         if (!selectedCrayfish) {
           errorList.innerHTML = "";
-          addSummaryError("crayfish-yes", "Select whether there are any crayfish present");
-          crayfishError.textContent = "Select whether there are any crayfish present";
+          addSummaryError("crayfish-yes", "Select whether native crayfish are present in the fishery");
+          crayfishError.textContent = "Select whether native crayfish are present in the fishery";
           crayfishError.hidden = false;
           errorSummary.hidden = false;
           holdingMessage.hidden = true;
@@ -3307,35 +3471,41 @@
         const selectedWaterType = document.querySelector('input[name="waterType"]:checked');
         const selectedLandlockedOnline = document.querySelector('input[name="landlockedOnline"]:checked');
         const selectedFloodPlain = document.querySelector('input[name="floodPlain"]:checked');
-        let detail = selectedWaterType ? selectedWaterType.value : "";
+        const detailRows = [
+          ["Type of water", selectedWaterType ? selectedWaterType.value : ""],
+        ];
 
         if (selectedWaterType && selectedWaterType.value === "Stillwater") {
-          detail += ", " + stillwaterGridReference.value.trim();
-          detail += ", " + stillwaterSize.value.trim() + " " + stillwaterSizeUnitInput.value;
+          detailRows.push(["National Grid Reference", stillwaterGridReference.value.trim()]);
+          detailRows.push(["Size", stillwaterSize.value.trim() + " " + stillwaterSizeUnitInput.value]);
           if (selectedLandlockedOnline) {
-            detail += ", " + selectedLandlockedOnline.value;
+            detailRows.push(["Connection type", selectedLandlockedOnline.value]);
           }
           if (selectedFloodPlain) {
-            detail += ", flood plain: " + selectedFloodPlain.value;
+            detailRows.push(["On a flood plain", selectedFloodPlain.value]);
           }
         }
 
         if (selectedWaterType && (selectedWaterType.value === "Canal" || selectedWaterType.value === "River")) {
-          const connectedDetails = [];
           if (upstreamLimit.value.trim()) {
-            connectedDetails.push("Upstream: " + upstreamLimit.value.trim());
+            detailRows.push(["Upstream limit", upstreamLimit.value.trim()]);
           }
           if (downstreamLimit.value.trim()) {
-            connectedDetails.push("Downstream: " + downstreamLimit.value.trim());
-          }
-          if (connectedDetails.length) {
-            detail += ", " + connectedDetails.join(", ");
+            detailRows.push(["Downstream limit", downstreamLimit.value.trim()]);
           }
         }
 
         return {
           name: waterName.value.trim(),
-          detail,
+          type: selectedWaterType ? selectedWaterType.value : "",
+          stillwaterGridReference: stillwaterGridReference.value.trim(),
+          stillwaterSize: stillwaterSize.value.trim(),
+          stillwaterSizeUnit: stillwaterSizeUnitInput.value,
+          landlockedOnline: selectedLandlockedOnline ? selectedLandlockedOnline.value : "",
+          floodPlain: selectedFloodPlain ? selectedFloodPlain.value : "",
+          upstreamLimit: upstreamLimit.value.trim(),
+          downstreamLimit: downstreamLimit.value.trim(),
+          detailRows,
         };
       }
 
@@ -3354,21 +3524,33 @@
 
         const summary = document.createElement("div");
         summary.className = "prototype-water-summary";
-        const list = document.createElement("dl");
-        list.className = "nrw-summary-list";
+        const table = document.createElement("div");
+        table.className = "prototype-water-summary-table";
 
-        savedWaterEntries.forEach((water) => {
+        savedWaterEntries.forEach((water, index) => {
           const row = document.createElement("div");
-          row.className = "nrw-summary-list__row";
+          row.className = "prototype-water-summary-table__row";
           row.innerHTML = `
-            <dt class="nrw-summary-list__key">${escapeHtml(water.name)}</dt>
-            <dd class="nrw-summary-list__value">${escapeHtml(water.detail)}</dd>
+            <div class="prototype-water-summary-table__lead">${escapeHtml(water.name)}</div>
+            <div class="prototype-water-summary-table__data">${escapeHtml(formatWaterSummaryRow(water))}</div>
+            <div class="prototype-water-summary-table__actions">
+              <a href="#" data-water-index="${index}">Change</a>
+              <span class="prototype-water-summary-table__divider" aria-hidden="true"></span>
+              <a href="#" data-remove-water-index="${index}">Remove</a>
+            </div>
           `;
-          list.appendChild(row);
+          table.appendChild(row);
         });
 
-        summary.appendChild(list);
+        summary.appendChild(table);
         waterSummaryList.appendChild(summary);
+      }
+
+      function formatWaterSummaryRow(water) {
+        if (water.type === "Stillwater" && water.landlockedOnline) {
+          return water.type + ", " + water.landlockedOnline;
+        }
+        return water.type;
       }
 
       function resetWaterForm() {
@@ -3387,6 +3569,33 @@
         });
         upstreamLimit.value = "";
         downstreamLimit.value = "";
+        updateWaterTypeConditionalQuestions();
+      }
+
+      function populateWaterForm(water) {
+        resetWaterForm();
+        waterName.value = water.name;
+        const waterTypeInput = document.querySelector('input[name="waterType"][value="' + water.type + '"]');
+        if (waterTypeInput) {
+          waterTypeInput.checked = true;
+        }
+        stillwaterGridReference.value = water.stillwaterGridReference || "";
+        stillwaterSize.value = water.stillwaterSize || "";
+        setStillwaterSizeUnit(water.stillwaterSizeUnit || "acres");
+        if (water.landlockedOnline) {
+          const landlockedInput = document.querySelector('input[name="landlockedOnline"][value="' + water.landlockedOnline + '"]');
+          if (landlockedInput) {
+            landlockedInput.checked = true;
+          }
+        }
+        if (water.floodPlain) {
+          const floodPlainInput = document.querySelector('input[name="floodPlain"][value="' + water.floodPlain + '"]');
+          if (floodPlainInput) {
+            floodPlainInput.checked = true;
+          }
+        }
+        upstreamLimit.value = water.upstreamLimit || "";
+        downstreamLimit.value = water.downstreamLimit || "";
         updateWaterTypeConditionalQuestions();
       }
 
@@ -3496,13 +3705,24 @@
         showWaterSummaryPanel();
         showScreen("water-name");
       });
-      gridReferenceBackButton.addEventListener("click", () => showScreen("location"));
-      nonNativeSpeciesBackButton.addEventListener("click", () => showScreen("grid-reference"));
-      crayfishBackButton.addEventListener("click", () => showScreen("non-native-species"));
-      fishBackButton.addEventListener("click", () => {
+      cefasBackButton.addEventListener("click", () => {
         renderWaterSummary();
         showWaterSummaryPanel();
         showScreen("water-name");
+      });
+      gridReferenceBackButton.addEventListener("click", () => showScreen("location"));
+      nonNativeSpeciesBackButton.addEventListener("click", () => showScreen("grid-reference"));
+      crayfishBackButton.addEventListener("click", () => {
+        if (hasStillwaterEntry()) {
+          showScreen("cefas");
+          return;
+        }
+        renderWaterSummary();
+        showWaterSummaryPanel();
+        showScreen("water-name");
+      });
+      fishBackButton.addEventListener("click", () => {
+        showScreen("crayfish");
       });
       personalDataBackButton.addEventListener("click", () => {
         renderFishSummary();
@@ -3565,6 +3785,35 @@
             resetFishForm();
             showFishEntryPanel();
             fishList.querySelector("input").focus();
+          }
+        }
+      });
+
+      waterSummaryList.addEventListener("click", (event) => {
+        if (event.target.matches("[data-water-index]")) {
+          event.preventDefault();
+          clearErrors();
+          const waterIndex = Number(event.target.dataset.waterIndex);
+          const [water] = savedWaterEntries.splice(waterIndex, 1);
+          renderWaterSummary();
+          populateWaterForm(water);
+          clearAddAnotherWaterAnswer();
+          showWaterEntryPanel();
+          waterName.focus();
+          return;
+        }
+
+        if (event.target.matches("[data-remove-water-index]")) {
+          event.preventDefault();
+          clearErrors();
+          const waterIndex = Number(event.target.dataset.removeWaterIndex);
+          savedWaterEntries.splice(waterIndex, 1);
+          renderWaterSummary();
+          clearAddAnotherWaterAnswer();
+          if (!savedWaterEntries.length) {
+            resetWaterForm();
+            showWaterEntryPanel();
+            waterName.focus();
           }
         }
       });
